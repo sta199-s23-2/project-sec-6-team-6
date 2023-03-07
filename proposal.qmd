@@ -18,9 +18,15 @@ library(tidyverse)
 
 -   Identify the source of the data.
 
+    -   CDC
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
+    -   Yearly, CDC survey
+
 -   Write a brief description of the observations.
+
+    -   Total, age, geographic location, gender, race-ethnicity, education, stratifications
 
 ## Research question
 
@@ -30,7 +36,7 @@ library(tidyverse)
 
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
-## Literature 
+## Literature
 
 -   Find one published credible article on the topic you are interested in researching.
 
@@ -64,7 +70,7 @@ library(tidyverse)
 
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
-## Literature 
+## Literature
 
 -   Find one published credible article on the topic you are interested in researching.
 
@@ -98,7 +104,7 @@ library(tidyverse)
 
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
-## Literature 
+## Literature
 
 -   Find one published credible article on the topic you are interested in researching.
 
