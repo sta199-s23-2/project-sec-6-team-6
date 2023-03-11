@@ -87,7 +87,7 @@ glimpse(Diabetes_data)
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
-    Since most reports were filed in 2015: Is there correlation between the type of report filed and the state in which it was reported in? Do the measures agree (i.e., does the rate of child fatalities per 1000 show a positive correlation if the number of reports per state shows a positive correlation)?
+    Since most reports were filed in 2015: Is there correlation between the type of report filed and the state in which it was reported in? Do the measures agree (i.e., does the rate of child fatalities per 1000 show a positive correlation if the number of reports per state shows a positive correlation)? This question is important because child neglect and abuse is immensely prevalent in the United States, and perhaps understanding in what states this is most common, we could narrow down a solution to diminishing child neglect in America. There really is no target audience, considering that this analysis affects all.
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
@@ -115,12 +115,15 @@ glimpse(Diabetes_data)
 
     The aforementioned data focuses more on the legal side of child abuse and neglect. Our research proposes a different lens: one where we identify which of these states (disregarding their bills/policies), if any, has significantly higher rates of a specific type of report (thus, it is more specific in regards of what type of neglect/abuse) - though, we can also consider the legal side if it is deemed important to our analysis.
 
+    A direct link to the data (that the research question will be based on) is here: https://healthdata.gov/dataset/National-Child-Abuse-and-Neglect-Data-System-NCAND/dpz9-kecg
+
 ## Glimpse of data
 
 ```{r}
 #| label: load-data-2
 
-read.csv("https://healthdata.gov/resource/dpz9-kecg.csv")
+proposal2 <- read.csv("https://healthdata.gov/resource/dpz9-kecg.csv")
+glimpse(proposal2)
 ```
 
 # Data 3
@@ -129,31 +132,51 @@ read.csv("https://healthdata.gov/resource/dpz9-kecg.csv")
 
 -   Identify the source of the data.
 
+tidytuesday
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
+This repository contains immunization rate data for schools across the U.S., as compiled by The Wall Street Journal. The dataset includes the overall and MMR-specific vaccination rates for 46,412 schools in 32 states. As used in "What's the Measles Vaccination Rate at Your Child's School?
+
 -   Write a brief description of the observations.
+
+It includes data about different geographic data and school data pertaining to measles vaccinations. including vaccination rate and types of schools included in the study.
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
+I want to look at how vaccination rates vary across different geographical regions. We can further understand this question by seeing if whether the school is public or private plays into vaccination rates.
+
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
+Identify areas of the U.S that have high vaccination rates of measles and further understnad how this data is influenced nby factors inlcuding wealth by a measure of private vs public schools.
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
+
+Quantiative - vaccination rates
+
+Categorical - private or public and county and state levels
 
 ## Literature
 
 -   Find one published credible article on the topic you are interested in researching.
 
+https://www.wsj.com/graphics/school-measles-rate-map/
+
 -   Provide a one paragraph summary about the article.
 
+The article from the Wall Street Journal presents a map of measles vaccination rates in schools across the United States, showing that some schools have dangerously low vaccination rates, which increases the risk of measles outbreaks. The data is based on information from the 2018-2019 school year and includes public, private, and charter schools. According to the map, many of the schools with the lowest vaccination rates are in states such as Idaho, Utah, Colorado, and Oregon. The article also notes that measles cases have been on the rise in recent years, and emphasizes the importance of vaccination in preventing the spread of the highly contagious virus.
+
 -   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
+
+My research is direclty related to the topic of the article because the article talks about the data included in the csv.
 
 ## Glimpse of data
 
 ```{r}
 #| label: load-data-3
 
-# add code here
+measles <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-25/measles.csv')
 
 ```
