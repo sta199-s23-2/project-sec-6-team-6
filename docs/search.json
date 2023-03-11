@@ -18,14 +18,14 @@
     "href": "proposal.html",
     "title": "Project title",
     "section": "",
-    "text": "library(tidyverse)\n\nWarning: package 'ggplot2' was built under R version 4.2.2\n\n\nWarning: package 'tidyr' was built under R version 4.2.2\n\n\nWarning: package 'readr' was built under R version 4.2.2\n\n\nWarning: package 'purrr' was built under R version 4.2.2"
+    "text": "library(tidyverse)"
   },
   {
     "objectID": "proposal.html#introduction-and-data",
     "href": "proposal.html#introduction-and-data",
     "title": "Project title",
     "section": "Introduction and data",
-    "text": "Introduction and data\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nWrite a brief description of the observations."
+    "text": "Introduction and data\n\nIdentify the source of the data.\n\nCDC\n\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\n\nYearly, CDC survey\n\nWrite a brief description of the observations.\n\nTotal, age, geographic location, gender, race-ethnicity, education, stratifications"
   },
   {
     "objectID": "proposal.html#research-question",
@@ -53,56 +53,56 @@
     "href": "proposal.html#introduction-and-data-1",
     "title": "Project title",
     "section": "Introduction and data",
-    "text": "Introduction and data\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nWrite a brief description of the observations."
+    "text": "Introduction and data\n\nIdentify the source of the data.\nHealthData.gov\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nOn a yearly basis, reports of children mistreatment, abuse, and neglect are collected from states that agree to share this information with the National Child Abuse and Neglect Data System. These reports include the type of mistreatment, demographic & geographic information, etc.\nWrite a brief description of the observations.\nThe observations included in this data set are state, year, type of report (fatalities, child victim), measure (i.e. the way data was measured: rate of child fatalities per 1000, number of reports), characteristic label (how it was filed, where it was reported), and value (number of children/cases). Additionally, within the dataset a lot of these observations are divided so that within one you can create many observations. For example, under type of report, each has its own values, state, characteristic (perhaps this table needs a pivot longer change)."
   },
   {
     "objectID": "proposal.html#research-question-1",
     "href": "proposal.html#research-question-1",
     "title": "Project title",
     "section": "Research question",
-    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nIdentify the types of variables in your research question. Categorical? Quantitative?"
+    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nSince most reports were filed in 2015: Is there correlation between the type of report filed and the state in which it was reported in? Do the measures agree (i.e., does the rate of child fatalities per 1000 show a positive correlation if the number of reports per state shows a positive correlation)? This question is important because child neglect and abuse is immensely prevalent in the United States, and perhaps understanding in what states this is most common, we could narrow down a solution to diminishing child neglect in America. There really is no target audience, considering that this analysis affects all.\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nThe hypothesis of this question would be that there is a correlation between the type of report filed and state, and specifically that Florida would have the highest number of reported cases of child fatalities (the assumption that rate and number of reports both show similar results will be held). The research topic would also include a comparison between the type of measure (rate of child fatalities versus the number of reports) and identify whether these data agree with one another.\nIdentify the types of variables in your research question. Categorical? Quantitative?\nType of report filed: categorical\nState: categorical\nMeasure: Quantitative"
   },
   {
     "objectID": "proposal.html#literature-1",
     "href": "proposal.html#literature-1",
     "title": "Project title",
     "section": "Literature",
-    "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\nProvide a one paragraph summary about the article.\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited."
+    "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\nhttps://www.acf.hhs.gov/cb/report/child-maltreatment-2019\nProvide a one paragraph summary about the article.\nThis article considers a state’s policies regarding abuse and neglect investigation. As our research question hopes to achieve, it also facets the data by state and gives specific statistics (#s) of help services/resources, reported cases (if allowed), perpetrator penalties, and children fatalities.\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited.\nThe aforementioned data focuses more on the legal side of child abuse and neglect. Our research proposes a different lens: one where we identify which of these states (disregarding their bills/policies), if any, has significantly higher rates of a specific type of report (thus, it is more specific in regards of what type of neglect/abuse) - though, we can also consider the legal side if it is deemed important to our analysis.\nA direct link to the data (that the research question will be based on) is here: https://healthdata.gov/dataset/National-Child-Abuse-and-Neglect-Data-System-NCAND/dpz9-kecg"
   },
   {
     "objectID": "proposal.html#glimpse-of-data-1",
     "href": "proposal.html#glimpse-of-data-1",
     "title": "Project title",
     "section": "Glimpse of data",
-    "text": "Glimpse of data\n\n# add code here"
+    "text": "Glimpse of data\n\nproposal2 <- read.csv(\"https://healthdata.gov/resource/dpz9-kecg.csv\")\nglimpse(proposal2)\n\nRows: 3\nColumns: 12\n$ update_date                   <chr> \"2021-02-24T23:11:54.000\", \"2021-02-24T2…\n$ days_since_update             <int> 0, 0, 16\n$ user                          <chr> \"Tyler Service Account - HHS\", \"Tyler Se…\n$ rows                          <int> 5003, 5003, 5003\n$ row_change                    <int> 5003, 0, 0\n$ columns                       <int> 7, 7, 7\n$ column_change                 <int> 7, 0, 0\n$ metadata_published            <chr> \"{\\\"name\\\": \\\"National Child Abuse and N…\n$ metadata_updates              <chr> \"{\\\"updates\\\": [], \\\"additions\\\": {\\\"nam…\n$ column_level_metadata         <chr> \"[{\\\"name\\\": \\\"State\\\", \\\"dataTypeName\\\"…\n$ column_level_metadata_updates <chr> \"{\\\"updates\\\": [], \\\"additions\\\": [{\\\"na…\n$ archive_link                  <chr> \"https://us-dhhs-aa.s3.us-east-2.amazona…"
   },
   {
     "objectID": "proposal.html#introduction-and-data-2",
     "href": "proposal.html#introduction-and-data-2",
     "title": "Project title",
     "section": "Introduction and data",
-    "text": "Introduction and data\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nWrite a brief description of the observations."
+    "text": "Introduction and data\n\nIdentify the source of the data.\n\ntidytuesday\n\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\n\nThis repository contains immunization rate data for schools across the U.S., as compiled by The Wall Street Journal. The dataset includes the overall and MMR-specific vaccination rates for 46,412 schools in 32 states. As used in “What’s the Measles Vaccination Rate at Your Child’s School?\n\nWrite a brief description of the observations.\n\nIt includes data about different geographic data and school data pertaining to measles vaccinations. including vaccination rate and types of schools included in the study."
   },
   {
     "objectID": "proposal.html#research-question-2",
     "href": "proposal.html#research-question-2",
     "title": "Project title",
     "section": "Research question",
-    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nIdentify the types of variables in your research question. Categorical? Quantitative?"
+    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\n\nI want to look at how vaccination rates vary across different geographical regions. We can further understand this question by seeing if whether the school is public or private plays into vaccination rates.\n\nA description of the research topic along with a concise statement of your hypotheses on this topic.\n\nIdentify areas of the U.S that have high vaccination rates of measles and further understnad how this data is influenced nby factors inlcuding wealth by a measure of private vs public schools.\n\nIdentify the types of variables in your research question. Categorical? Quantitative?\n\nQuantiative - vaccination rates\nCategorical - private or public and county and state levels"
   },
   {
     "objectID": "proposal.html#literature-2",
     "href": "proposal.html#literature-2",
     "title": "Project title",
     "section": "Literature",
-    "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\nProvide a one paragraph summary about the article.\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited."
+    "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\n\nhttps://www.wsj.com/graphics/school-measles-rate-map/\n\nProvide a one paragraph summary about the article.\n\nThe article from the Wall Street Journal presents a map of measles vaccination rates in schools across the United States, showing that some schools have dangerously low vaccination rates, which increases the risk of measles outbreaks. The data is based on information from the 2018-2019 school year and includes public, private, and charter schools. According to the map, many of the schools with the lowest vaccination rates are in states such as Idaho, Utah, Colorado, and Oregon. The article also notes that measles cases have been on the rise in recent years, and emphasizes the importance of vaccination in preventing the spread of the highly contagious virus.\n\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited.\n\nMy research is direclty related to the topic of the article because the article talks about the data included in the csv."
   },
   {
     "objectID": "proposal.html#glimpse-of-data-2",
     "href": "proposal.html#glimpse-of-data-2",
     "title": "Project title",
     "section": "Glimpse of data",
-    "text": "Glimpse of data\n\n# add code here"
+    "text": "Glimpse of data\n\nmeasles <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-25/measles.csv')\n\nRows: 66113 Columns: 16\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (6): state, year, name, type, city, county\ndbl (8): index, enroll, mmr, overall, xmed, xper, lat, lng\nlgl (2): district, xrel\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message."
   },
   {
     "objectID": "report.html",

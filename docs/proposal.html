@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.36">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -53,7 +58,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -66,7 +71,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -157,7 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -207,35 +212,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.2.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tidyr' was built under R version 4.2.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'readr' was built under R version 4.2.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'purrr' was built under R version 4.2.2</code></pre>
-</div>
 </div>
 <section id="data-1" class="level1">
 <h1>Data 1</h1>
 <section id="introduction-and-data" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-and-data">Introduction and data</h2>
 <ul>
-<li><p>Identify the source of the data.</p></li>
-<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p></li>
-<li><p>Write a brief description of the observations.</p></li>
+<li><p>Identify the source of the data.</p>
+<ul>
+<li>CDC</li>
+</ul></li>
+<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p>
+<ul>
+<li>Yearly, CDC survey</li>
+</ul></li>
+<li><p>Write a brief description of the observations.</p>
+<ul>
+<li>Total, age, geographic location, gender, race-ethnicity, education, stratifications</li>
+</ul></li>
 </ul>
 </section>
 <section id="research-question" class="level2">
 <h2 class="anchored" data-anchor-id="research-question">Research question</h2>
 <ul>
-<li>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</li>
-<li>A description of the research topic along with a concise statement of your hypotheses on this topic.</li>
-<li>Identify the types of variables in your research question. Categorical? Quantitative?</li>
+<li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p></li>
+<li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p></li>
+<li><p>Identify the types of variables in your research question. Categorical? Quantitative?</p></li>
 </ul>
 </section>
 <section id="literature" class="level2">
@@ -249,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="glimpse-of-data" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -258,31 +260,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="introduction-and-data-1" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-and-data-1">Introduction and data</h2>
 <ul>
-<li><p>Identify the source of the data.</p></li>
-<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p></li>
-<li><p>Write a brief description of the observations.</p></li>
+<li><p>Identify the source of the data.</p>
+<p>HealthData.gov</p></li>
+<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p>
+<p>On a yearly basis, reports of children mistreatment, abuse, and neglect are collected from states that agree to share this information with the National Child Abuse and Neglect Data System. These reports include the type of mistreatment, demographic &amp; geographic information, etc.</p></li>
+<li><p>Write a brief description of the observations.</p>
+<p>The observations included in this data set are state, year, type of report (fatalities, child victim), measure (i.e.&nbsp;the way data was measured: rate of child fatalities per 1000, number of reports), characteristic label (how it was filed, where it was reported), and value (number of children/cases). Additionally, within the dataset a lot of these observations are divided so that within one you can create many observations. For example, under type of report, each has its own values, state, characteristic (perhaps this table needs a pivot longer change).</p></li>
 </ul>
 </section>
 <section id="research-question-1" class="level2">
 <h2 class="anchored" data-anchor-id="research-question-1">Research question</h2>
 <ul>
-<li>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</li>
-<li>A description of the research topic along with a concise statement of your hypotheses on this topic.</li>
-<li>Identify the types of variables in your research question. Categorical? Quantitative?</li>
+<li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p>
+<p>Since most reports were filed in 2015: Is there correlation between the type of report filed and the state in which it was reported in? Do the measures agree (i.e., does the rate of child fatalities per 1000 show a positive correlation if the number of reports per state shows a positive correlation)? This question is important because child neglect and abuse is immensely prevalent in the United States, and perhaps understanding in what states this is most common, we could narrow down a solution to diminishing child neglect in America. There really is no target audience, considering that this analysis affects all.</p></li>
+<li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p>
+<p>The hypothesis of this question would be that there is a correlation between the type of report filed and state, and specifically that Florida would have the highest number of reported cases of child fatalities (the assumption that rate and number of reports both show similar results will be held). The research topic would also include a comparison between the type of measure (rate of child fatalities versus the number of reports) and identify whether these data agree with one another.</p></li>
+<li><p>Identify the types of variables in your research question. Categorical? Quantitative?</p>
+<p>Type of report filed: categorical</p>
+<p>State: categorical</p>
+<p>Measure: Quantitative</p></li>
 </ul>
 </section>
 <section id="literature-1" class="level2">
 <h2 class="anchored" data-anchor-id="literature-1">Literature</h2>
 <ul>
-<li><p>Find one published credible article on the topic you are interested in researching.</p></li>
-<li><p>Provide a one paragraph summary about the article.</p></li>
-<li><p>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</p></li>
+<li><p>Find one published credible article on the topic you are interested in researching.</p>
+<p>https://www.acf.hhs.gov/cb/report/child-maltreatment-2019</p></li>
+<li><p>Provide a one paragraph summary about the article.</p>
+<p>This article considers a state’s policies regarding abuse and neglect investigation. As our research question hopes to achieve, it also facets the data by state and gives specific statistics (#s) of help services/resources, reported cases (if allowed), perpetrator penalties, and children fatalities.</p></li>
+<li><p>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</p>
+<p>The aforementioned data focuses more on the legal side of child abuse and neglect. Our research proposes a different lens: one where we identify which of these states (disregarding their bills/policies), if any, has significantly higher rates of a specific type of report (thus, it is more specific in regards of what type of neglect/abuse) - though, we can also consider the legal side if it is deemed important to our analysis.</p>
+<p>A direct link to the data (that the research question will be based on) is here: https://healthdata.gov/dataset/National-Child-Abuse-and-Neglect-Data-System-NCAND/dpz9-kecg</p></li>
 </ul>
 </section>
 <section id="glimpse-of-data-1" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data-1">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>proposal2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://healthdata.gov/resource/dpz9-kecg.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(proposal2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 3
+Columns: 12
+$ update_date                   &lt;chr&gt; "2021-02-24T23:11:54.000", "2021-02-24T2…
+$ days_since_update             &lt;int&gt; 0, 0, 16
+$ user                          &lt;chr&gt; "Tyler Service Account - HHS", "Tyler Se…
+$ rows                          &lt;int&gt; 5003, 5003, 5003
+$ row_change                    &lt;int&gt; 5003, 0, 0
+$ columns                       &lt;int&gt; 7, 7, 7
+$ column_change                 &lt;int&gt; 7, 0, 0
+$ metadata_published            &lt;chr&gt; "{\"name\": \"National Child Abuse and N…
+$ metadata_updates              &lt;chr&gt; "{\"updates\": [], \"additions\": {\"nam…
+$ column_level_metadata         &lt;chr&gt; "[{\"name\": \"State\", \"dataTypeName\"…
+$ column_level_metadata_updates &lt;chr&gt; "{\"updates\": [], \"additions\": [{\"na…
+$ archive_link                  &lt;chr&gt; "https://us-dhhs-aa.s3.us-east-2.amazona…</code></pre>
+</div>
 </div>
 </section>
 </section>
@@ -291,31 +322,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="introduction-and-data-2" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-and-data-2">Introduction and data</h2>
 <ul>
-<li><p>Identify the source of the data.</p></li>
-<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p></li>
-<li><p>Write a brief description of the observations.</p></li>
+<li>Identify the source of the data.</li>
 </ul>
+<p>tidytuesday</p>
+<ul>
+<li>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</li>
+</ul>
+<p>This repository contains immunization rate data for schools across the U.S., as compiled by The Wall Street Journal. The dataset includes the overall and MMR-specific vaccination rates for 46,412 schools in 32 states. As used in “What’s the Measles Vaccination Rate at Your Child’s School?</p>
+<ul>
+<li>Write a brief description of the observations.</li>
+</ul>
+<p>It includes data about different geographic data and school data pertaining to measles vaccinations. including vaccination rate and types of schools included in the study.</p>
 </section>
 <section id="research-question-2" class="level2">
 <h2 class="anchored" data-anchor-id="research-question-2">Research question</h2>
 <ul>
 <li>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</li>
+</ul>
+<p>I want to look at how vaccination rates vary across different geographical regions. We can further understand this question by seeing if whether the school is public or private plays into vaccination rates.</p>
+<ul>
 <li>A description of the research topic along with a concise statement of your hypotheses on this topic.</li>
+</ul>
+<p>Identify areas of the U.S that have high vaccination rates of measles and further understnad how this data is influenced nby factors inlcuding wealth by a measure of private vs public schools.</p>
+<ul>
 <li>Identify the types of variables in your research question. Categorical? Quantitative?</li>
 </ul>
+<p>Quantiative - vaccination rates</p>
+<p>Categorical - private or public and county and state levels</p>
 </section>
 <section id="literature-2" class="level2">
 <h2 class="anchored" data-anchor-id="literature-2">Literature</h2>
 <ul>
-<li><p>Find one published credible article on the topic you are interested in researching.</p></li>
-<li><p>Provide a one paragraph summary about the article.</p></li>
-<li><p>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</p></li>
+<li>Find one published credible article on the topic you are interested in researching.</li>
 </ul>
+<p>https://www.wsj.com/graphics/school-measles-rate-map/</p>
+<ul>
+<li>Provide a one paragraph summary about the article.</li>
+</ul>
+<p>The article from the Wall Street Journal presents a map of measles vaccination rates in schools across the United States, showing that some schools have dangerously low vaccination rates, which increases the risk of measles outbreaks. The data is based on information from the 2018-2019 school year and includes public, private, and charter schools. According to the map, many of the schools with the lowest vaccination rates are in states such as Idaho, Utah, Colorado, and Oregon. The article also notes that measles cases have been on the rise in recent years, and emphasizes the importance of vaccination in preventing the spread of the highly contagious virus.</p>
+<ul>
+<li>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</li>
+</ul>
+<p>My research is direclty related to the topic of the article because the article talks about the data included in the csv.</p>
 </section>
 <section id="glimpse-of-data-2" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data-2">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>measles <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-25/measles.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 66113 Columns: 16
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (6): state, year, name, type, city, county
+dbl (8): index, enroll, mmr, overall, xmed, xper, lat, lng
+lgl (2): district, xrel
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
 </div>
 
 
@@ -392,7 +456,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
