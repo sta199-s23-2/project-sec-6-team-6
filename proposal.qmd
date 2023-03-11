@@ -66,19 +66,31 @@ library(tidyverse)
 
 -   Write a brief description of the observations.
 
-    This dataset includes
+    The observations included in this data set are state, year, type of report (fatalities, child victim), measure (i.e. the way data was measured: rate of child fatalities per 1000, number of reports), characteristic label (how it was filed, where it was reported), and value (number of children/cases). Additionally, within the dataset a lot of these observations are divided so that within one you can create many observations. For example, under type of report, each has its own values, state, characteristic (perhaps this table needs a pivot longer change).
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
+    Since most reports were filed in 2015: Is there correlation between the type of report filed and the state in which it was reported in? Do the measures agree (i.e., does the rate of child fatalities per 1000 show a positive correlation if the number of reports per state shows a positive correlation)?
+
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
+    The hypothesis of this question would be that there is a correlation between the type of report filed and state, and specifically that Florida would have the highest number of reported cases of child fatalities (the assumption that rate and number of reports both show similar results will be held). The research topic would also include a comparison between the type of measure (rate of child fatalities versus the number of reports) and identify whether these data agree with one another.
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
+
+    Type of report filed: categorical
+
+    State: categorical
+
+    Measure: Quantitative
 
 ## Literature
 
 -   Find one published credible article on the topic you are interested in researching.
+
+    https://www.acf.hhs.gov/cb/report/child-maltreatment-2019
 
 -   Provide a one paragraph summary about the article.
 
