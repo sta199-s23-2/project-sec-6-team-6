@@ -100,6 +100,8 @@ library(tidyverse)
 
     The aforementioned data focuses more on the legal side of child abuse and neglect. Our research proposes a different lens: one where we identify which of these states (disregarding their bills/policies), if any, has significantly higher rates of a specific type of report (thus, it is more specific in regards of what type of neglect/abuse) - though, we can also consider the legal side if it is deemed important to our analysis.
 
+    A direct link to the data (that the research question will be based on) is here: https://healthdata.gov/dataset/National-Child-Abuse-and-Neglect-Data-System-NCAND/dpz9-kecg
+
 ## Glimpse of data
 
 ```{r}
