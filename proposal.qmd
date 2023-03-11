@@ -94,14 +94,18 @@ library(tidyverse)
 
 -   Provide a one paragraph summary about the article.
 
+    This article considers a state's policies regarding abuse and neglect investigation. As our research question hopes to achieve, it also facets the data by state and gives specific statistics (#s) of help services/resources, reported cases (if allowed), perpetrator penalties, and children fatalities.
+
 -   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
+
+    The aforementioned data focuses more on the legal side of child abuse and neglect. Our research proposes a different lens: one where we identify which of these states (disregarding their bills/policies), if any, has significantly higher rates of a specific type of report (thus, it is more specific in regards of what type of neglect/abuse) - though, we can also consider the legal side if it is deemed important to our analysis.
 
 ## Glimpse of data
 
 ```{r}
 #| label: load-data-2
 
-# add code here
+read.csv("https://healthdata.gov/resource/dpz9-kecg.csv")
 ```
 
 # Data 3
