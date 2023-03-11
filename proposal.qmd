@@ -26,15 +26,21 @@ library(tidyverse)
 
 -   Write a brief description of the observations.
 
-    -   Total, age, geographic location, gender, race-ethnicity, education, stratifications
+    -   Total, state, county, diabetes percentage, overall SVI, food scarcity/economic status
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
+    -   What areas are most affected by diabetes and how the food insecurity of those areas affect diabetes
+
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
+    -   we believe that as food insecurity increases, diabetes rates will also increase
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
+
+    -   
 
 ## Literature
 
@@ -49,7 +55,8 @@ library(tidyverse)
 ```{r}
 #| label: load-data-1
 
-# add code here
+Diabetes_data <- read_csv("data/DiabetesAtlasData.csv")
+glimpse(Diabetes_data)
 ```
 
 # Data 2
