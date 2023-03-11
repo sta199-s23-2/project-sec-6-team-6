@@ -107,7 +107,8 @@ library(tidyverse)
 ```{r}
 #| label: load-data-2
 
-read.csv("https://healthdata.gov/resource/dpz9-kecg.csv")
+proposal2 <- read.csv("https://healthdata.gov/resource/dpz9-kecg.csv")
+glimpse(proposal2)
 ```
 
 # Data 3
