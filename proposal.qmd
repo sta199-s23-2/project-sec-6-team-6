@@ -58,9 +58,15 @@ library(tidyverse)
 
 -   Identify the source of the data.
 
+    HealthData.gov
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
+    On a yearly basis, reports of children mistreatment, abuse, and neglect are collected from states that agree to share this information with the National Child Abuse and Neglect Data System. These reports include the type of mistreatment, demographic & geographic information, etc.
+
 -   Write a brief description of the observations.
+
+    This dataset includes
 
 ## Research question
 
@@ -118,4 +124,5 @@ library(tidyverse)
 #| label: load-data-3
 
 # add code here
+
 ```
