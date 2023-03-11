@@ -26,7 +26,7 @@ library(tidyverse)
 
 -   Write a brief description of the observations.
 
-    -   Total, state, county, diabetes percentage, overall SVI, food scarcity/economic status
+    -   Total, state, county, diabetes percentage, overall SVI,
 
 ## Research question
 
@@ -36,19 +36,27 @@ library(tidyverse)
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
-    -   we believe that as food insecurity increases, diabetes rates will also increase
+    -   we believe that as social vulnerability increases, diabetes rates will also increase
 
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
-    -   
+    -   Diabetes percentage, SVI: quantitative
+
+    -   Area: Categorical
 
 ## Literature
 
 -   Find one published credible article on the topic you are interested in researching.
 
+    -   https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8037472/
+
 -   Provide a one paragraph summary about the article.
 
+    -   Food insecurity is a vicious cycle that leads to further food insecurity. Healthcare providers must work to help alleviate the issues found in communities and patients who are more socially vulnerable. The vulnerability causes poor diet, which causes diabetes, which increases health complications, which increases healthcare costs, which further increases vulnerability.
+
 -   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
+
+    -   The research question will more specifically find the target areas where vulnerability and diabetes are significantly higher than average. This will give a good estimate of what areas are most affected.
 
 ## Glimpse of data
 
