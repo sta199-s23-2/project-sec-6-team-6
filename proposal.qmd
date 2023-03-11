@@ -73,6 +73,7 @@ library(tidyverse)
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
     Since most reports were filed in 2015: Is there correlation between the type of report filed and the state in which it was reported in? Do the measures agree (i.e., does the rate of child fatalities per 1000 show a positive correlation if the number of reports per state shows a positive correlation)?
+    This question is important because child neglect and abuse is immensely prevalent in the United States, and perhaps understanding in what states this is most common, we could narrow down a solution to diminishing child neglect in America. There really is no target audience, considering that this analysis affects all.
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
