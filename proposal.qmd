@@ -128,8 +128,12 @@ glimpse(Diabetes_data)
 ```{r}
 #| label: load-data-2
 
-proposal2 <- read.csv("https://healthdata.gov/resource/dpz9-kecg.csv")
+proposal2 <- read.csv("https://us-dhhs-aa.s3.us-east-2.amazonaws.com/ej22-ej5b_2021-02-24T23-11-54.csv")
+proposal2b <- read.csv("https://us-dhhs-aa.s3.us-east-2.amazonaws.com/ej22-ej5b_2021-02-24T23-29-27.csv")
+proposal2c <- read.csv("https://us-dhhs-aa.s3.us-east-2.amazonaws.com/ej22-ej5b_2021-03-12T18-17-17.csv")
 glimpse(proposal2)
+glimpse(proposal2b)
+glimpse(proposal2c)
 ```
 
 # Data 3
