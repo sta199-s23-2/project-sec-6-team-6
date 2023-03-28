@@ -7,8 +7,8 @@ execute:
   echo: true
 ---
 
-**Introduction and Data**
+## Introduction and Data
 
-**Methodology**
+## Methodology
 
-**Results**
+## Results
