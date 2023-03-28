@@ -189,11 +189,16 @@ My research is direclty related to the topic of the article because the article 
 ```{r}
 #| label: load-data-3
 
-measles <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-25/measles.csv')
+measles <- readr::read_csv('data/measles.csv')
+
+glimpse(measles)
 
 ```
 
+<<<<<<< HEAD
 ```{r}
 
 glimpse(measles)
 ```
+=======
+>>>>>>> 204f39743c6f2ec08e6f08a3d54531f567522769
