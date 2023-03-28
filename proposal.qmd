@@ -156,7 +156,7 @@ It includes data about different geographic data and school data pertaining to m
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
-I want to look at how vaccination rates vary across different geographical regions. We can further understand this question by seeing if whether the school is public or private plays into vaccination rates.
+How does vaccination rate for measles differ across regions and school districts and types of schools? We can also consider factors such as enrollment, year, and whether the district is rural or urban
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
@@ -195,3 +195,10 @@ glimpse(measles)
 
 ```
 
+<<<<<<< HEAD
+```{r}
+
+glimpse(measles)
+```
+=======
+>>>>>>> 204f39743c6f2ec08e6f08a3d54531f567522769
