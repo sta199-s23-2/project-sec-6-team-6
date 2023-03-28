@@ -1,10 +1,14 @@
 ---
-title: "Project title"
-subtitle: "Report"
+title: "The Measles Project"
+subtitle: "Comparing Private & Public Schools"
 format: html
 editor: visual
 execute:
   echo: true
 ---
 
-Add project writeup here.
+**Introduction and Data**
+
+**Methodology**
+
+**Results**
