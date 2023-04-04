@@ -8,6 +8,6 @@ This project was developed by **\[team name\]** For [STA 199: Introduction to Da
 
 -   Team member 1: One sentence description of Team member 1 (e.g., year, major, etc.).
 -   Team member 2: Austin is a class of 2025 sophomore majoring statistics and psychology.
--   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).
+-   Cristofer Navas: Class of 2025 student at Duke University majoring in biology and minoring in chemistry.
 -   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.).
 -   ...
