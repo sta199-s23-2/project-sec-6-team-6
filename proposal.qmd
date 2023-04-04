@@ -195,10 +195,4 @@ glimpse(measles)
 
 ```
 
-<<<<<<< HEAD
-```{r}
 
-glimpse(measles)
-```
-=======
->>>>>>> 204f39743c6f2ec08e6f08a3d54531f567522769
