@@ -9,19 +9,27 @@ execute:
 
 ## Introduction and Data
 
-Research question: In 2018, how does the vaccination rate for measles differ across regions in the US? How do school districts in regions with high vaccination rates vs. low vaccination rates differ (public v. private, enrollment rate, type of geographical region - urban, rural)?
+**Motivation and Context**
 
-Hypothesis: Still working on this one - sigrid
+**Research question and Hypotheses**
 
-motivation and context
+**Ethical Issues**
 
-ethical issues
+Vaccination data is listed under HIPAA as protected health information and therefore cannot be shared without patient consent. In certain areas, vaccine data is not required for schools as well. The data may also be used to unjustly discriminate against certain areas as well. The sample population does not all benefit equally from the our
 
-citing sources
+**Citing Sources**
 
 ## Methodology
 
 visualizations and summary statistics
+
+scatter plot, points are states
+
+tables of states
+
+public vs private
+
+state highest vs. lowest (county x, county y)
 
 ## Results
 
