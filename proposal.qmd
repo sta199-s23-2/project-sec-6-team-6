@@ -40,12 +40,9 @@ library(tidyverse)
 
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
-
-
     -   Diabetes percentage, SVI: quantitative
 
     -   Area: Categorical
-
 
 ## Literature
 
@@ -98,14 +95,11 @@ glimpse(Diabetes_data)
 
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
-
-
     Type of report filed: categorical
 
     State: categorical
 
     Measure: Quantitative
-
 
 ## Literature
 
@@ -164,11 +158,9 @@ Identify areas of the U.S that have high vaccination rates of measles and furthe
 
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
-
 Quantiative - vaccination rates
 
 Categorical - private or public and county and state levels
-
 
 ## Literature
 
@@ -194,5 +186,3 @@ measles <- readr::read_csv('data/measles.csv')
 glimpse(measles)
 
 ```
-
-
