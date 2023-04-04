@@ -9,6 +9,18 @@ execute:
 
 ## Introduction and Data
 
+motivation and context
+
+research question and hypotheses
+
+ethical issues
+
+citing sources
+
 ## Methodology
 
+visualizations and summary statistics
+
 ## Results
+
+main results from your analysis
