@@ -9,9 +9,11 @@ execute:
 
 ## Introduction and Data
 
-motivation and context
+Research question: In 2018, how does the vaccination rate for measles differ across regions in the US? How do school districts in regions with high vaccination rates vs. low vaccination rates differ (public v. private, enrollment rate, type of geographical region - urban, rural)?
 
-research question and hypotheses
+Hypothesis: Still working on this one - sigrid
+
+motivation and context
 
 ethical issues
 
