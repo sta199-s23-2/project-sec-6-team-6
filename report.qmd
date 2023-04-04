@@ -15,7 +15,7 @@ execute:
 
 **Ethical Issues**
 
-Vaccination data is listed under HIPAA as protected health information and therefore cannot be shared without patient consent. In certain areas, vaccine data is not required for schools as well. The data may also be used to unjustly discriminate against certain areas as well. The sample population does not all benefit equally from the our
+Vaccination data is listed under HIPAA as protected health information and therefore cannot be shared without patient consent. In certain areas, vaccine data is not required for schools as well. The data may also be used to discriminate against certain areas unjustly. The sample population does not all benefit equally from our research.
 
 **Citing Sources**
 
