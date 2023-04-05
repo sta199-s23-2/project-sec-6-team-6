@@ -101,6 +101,30 @@ tables of states
 
 public vs private
 
+```{r}
+measles<- measles |>
+  filter(!is.na(county)) |>
+  filter(overall >= 0)
+```
+
+```{r}
+
+
+measles_filtered <- measles[measles$type %in% c("Public", "Private"), ]
+
+mean_vaccination_rate <- aggregate(overall ~ type, measles_filtered, mean)
+
+
+ggplot(mean_vaccination_rate, aes(x = type, y = overall, fill = type)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Vaccination Rates by School Type", 
+       x = "School Type", 
+       y = "Mean Vaccination Rate") +
+  theme_bw()
+
+
+```
+
 state highest vs. lowest (county x, county y)
 
 ## Results
