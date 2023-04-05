@@ -62,6 +62,8 @@ measles<- measles |>
 ```
 
 ```{r}
+#| eval: false 
+
 USA <- getData("GADM", country = "usa", level = 2)
 
 # Prepare data
