@@ -13,8 +13,6 @@ execute:
 
 library(tidyverse)
 library(leaflet)
-library(raster)
-library(viridis)
 ```
 
 ## Introduction and Data
@@ -56,50 +54,59 @@ glimpse(measles)
 ```{r}
 #| label: filtering-dataset
 
-measles<- measles |>
+measles <- measles |>
+  mutate(region = if_else(county == "NA", "USA", "USA")) |>
   filter(!is.na(county)) |>
+  filter(!is.na(state)) |>
+  filter(!is.na(city)) |>
+  filter(!is.na(lat)) |>
+  filter(!is.na(lng)) |>
   filter(overall >= 0)
 ```
 
+
 ```{r}
-#| eval: false 
+#| label: group-by
 
-USA <- getData("GADM", country = "usa", level = 2)
-
-mydata <- data.frame(state = c("Iowa", "Oklahoma"),
-                     county = "Adair",
-                     value = c(20, 100),
-                     stringsAsFactors = FALSE)
-
-temp <- merge(USA, mydata,
-              by.x = c("NAME_1", "NAME_2"), by.y = c("state", "county"),
-              all.x = TRUE)
-
-mypal <- colorNumeric(palette = "viridis", domain = temp$value, na.color = "grey")
-
-leaflet() |>
-addProviderTiles("OpenStreetMap.Mapnik") |>
-setView(lat = 39.8283, lng = -98.5795, zoom = 4) |>
-addPolygons(data = USA, stroke = FALSE, smoothFactor = 0.2, fillOpacity = 0.3,
-            fillColor = ~mypal(temp$value),
-            popup = paste("Region: ", temp$NAME_2, "<br>",
-                          "Value: ", temp$value, "<br>")) |>
-addLegend(position = "bottomleft", pal = mypal, values = temp$value,
-          title = "Value",
-          opacity = 1)
+measles_map <- measles |>
+  filter(region == "USA")|>
+  group_by(city, state, lat, lng) |>
+  summarise(count = n()) |>
+  arrange(desc(count))
 ```
+
+```{r}
+#| label: US-map-per-county
+
+mycolor <- colorNumeric(palette = 'RdBu', domain = c(1:8), 
+                        reverse = T)
+
+```
+
+```{r}
+#| label: leaflet-map
+
+measles_map |>
+  leaflet() |>
+  addProviderTiles('CartoDB') |>
+  addCircleMarkers(radius = ~0.01*count, 
+                   color = ~mycolor(count),
+                   popup = ~paste0(city, "<br/>",
+                                   count)) |>
+  addLegend(pal = mycolor, 
+            values = c(1:8),
+            opacity = 0.75,
+            title = "Count",
+            position = 'topleft')
+
+```
+
 
 scatter plot, points are states
 
 tables of states
 
 public vs private
-
-```{r}
-measles<- measles |>
-  filter(!is.na(county)) |>
-  filter(overall >= 0)
-```
 
 ```{r}
 
