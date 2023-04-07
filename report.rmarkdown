@@ -17,6 +17,7 @@ library(raster)
 library(viridis)
 ```
 
+
 ## Introduction and Data
 
 **Research question:** In 2018, how does the vaccination rate for measles differ across regions in the US? How do school districts in regions with high vaccination rates vs. low vaccination rates differ (public v. private, enrollment rate, type of geographical region - urban, rural)?
@@ -42,6 +43,7 @@ Vaccination data is listed under HIPAA as protected health information and there
 ## Methodology
 
 visualizations and summary statistics
+
 
 ```{r}
 #| label: Data
@@ -85,6 +87,7 @@ addLegend(position = "bottomleft", pal = mypal, values = temp$value,
           opacity = 1)
 ```
 
+
 scatter plot, points are states
 
 tables of states
@@ -96,3 +99,4 @@ state highest vs. lowest (county x, county y)
 ## Results
 
 main results from your analysis
+
