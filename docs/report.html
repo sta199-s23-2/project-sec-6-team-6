@@ -205,10 +205,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Counties that don’t report vaccination rates</p>
 <p><strong>Motivation and Context</strong></p>
 <p>The motivation for this project stemmed from the measles dataset from tidytuesday. It was interesting to see how the data set categorically characterized the data. Our team imported the data into R and used the categories as a guide to make our plots and questions. The data as reported in the Wall Street Journal presents a map of measles vaccination rates in schools across the United States, showing that some schools have dangerously low vaccination rates, which increases the risk of measles outbreaks. The data is based on information from the 2018-2019 school year and includes public, private, and charter schools. According to the map, many of the schools with the lowest vaccination rates are in states such as Idaho, Utah, Colorado, and Oregon. The article also notes that measles cases have been on the rise in recent years, and emphasizes the importance of vaccination in preventing the spread of the highly contagious virus. Through this narrative and viewing the raw data we were able to form our hypothesis and question.</p>
-<p><strong>Research question and Hypotheses</strong></p>
 <p><strong>Ethical Issues</strong></p>
 <p>Vaccination data is listed under HIPAA as protected health information and therefore cannot be shared without patient consent. In certain areas, vaccine data is not required for schools as well. The data may also be used to discriminate against certain areas unjustly. The sample population does not all benefit equally from our research. Some areas may also be more or less receptive to revealing their vaccination information so the study may not impact our target population equally.</p>
 <p><strong>Citing Sources</strong></p>
+<p>[1] “Urban Percentage of the Population for States, Historical.” Iowa State University | Iowa Community Indicators Program, Iowa State University, www.icip.iastate.edu/tables/population/urban-pct-states.</p>
 </section>
 <section id="methodology" class="level2">
 <h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
@@ -370,19 +370,79 @@ the `.groups` argument.</code></pre>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mean_measles_state <span class="ot">&lt;-</span> measles_state <span class="sc">|&gt;</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_mmr =</span> <span class="fu">mean</span>(mmr)) </span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>measles_state <span class="sc">|&gt;</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> mmr, <span class="at">y =</span> state)) <span class="sc">+</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>high_low_state_mean <span class="ot">&lt;-</span> measles_state <span class="sc">|&gt;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="fu">c</span>(<span class="st">"Illinois"</span>, <span class="st">"Massachusetts"</span>, <span class="st">"Pennsylvania"</span>, <span class="st">"Arkansas"</span>, </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Washington"</span>, <span class="st">"Minnesota"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length
+
+Warning in state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", :
+longer object length is not a multiple of shorter object length</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>high_low_state_mean <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> mmr, <span class="at">y =</span> state)) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"mmr vaccination rate (%)"</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"state"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"States with Highest and Lowest Reported MMR Vaccination Rates"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/plot_measles_state-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Figure 3. This plot represents the six states with the highest and lowest MMR vaccination rates from the total states sampled. The states with the lowest reported MMR vaccination rates was Arkansas, Washington, and Minnesota. The states with the highest reported MMR vaccination rates was Massachusetts, Illinois, and Pennsylvania.</p>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
 <p>Figure 1 - This visualization answers the 1st research question by showing which states have a high percentage of mmr vaccination rates across different schools (such as Ohio), and states that have a low percentage (such as Florida). Though Ohio and Florida don’t show much variability across different schools, California does show a lot of variability. Overall, this shows a general map of how mmr vaccination rates differ across different regions in the US.</p>
 <p>Figure 2 - The graph showing the average vaccination rates between private and public schools seems to show a higher average vaccination rate for public schools. This is possibly due to local government rules and control over public schools in which students may be mandated to get vaccinated. Whereas in private schools it may have been more up to choice and out of government control.</p>
+<p>Figure 3 - To explore if there is a relationship between urban and rural status and MMR vaccination rate, first, the states with the highest (Massachusetts, Illinois, and Pennsylvania) and lowest (Arkansas, Washington, and Minnesota) mean MMR vaccination rates were plotted. On its own this does not display any relation of urban or rural status to percentage of MMR vaccination rates, so information, provided by Iowa State University, on the 2010 U.S. Decenial Cenus was referenced [1]. The percentage of the total population in urban areas per each state was found: Massachusetts (92%), Illinois (88.5%), Pennsylvania (78.7%), Arkansas (56.2%), Washington (84.1%), and Minnesota (73.3%). There appears to be a weak correlation between urban/rural status of each state and MMR vaccination rate, but to a slight degree there is a trend. For instance, the state with the most drastic difference in mean MMR vaccination rate is Arkansas (80.49%) when compared to states with the highest mean MMR vaccination rates (&gt;95%). Relatedely, Arkansas also has a significantly lower percentage of the total population in urban areas. States like Massachusetts and Illinois hold comparably higher percentages of the total population in urban areas <em>and</em> hold the highest mean MMR vaccination rates, 97.04% &amp; 97.39% respectively. However, states like Washington weaken the correlation by having a high percentage of the total population in urban areas, but reporting a comparably low mean MMR vaccination rate (89.3%).</p>
 <p>Full disclosure: In the first visualization, there are some data points in Asia, suggesting that some of the schools are located in Asia, but we are working on removing these. Also, for now the first visualization has “eval: FALSE” to facilitate pushing and pulling on GitHub (leaflet takes up a lot of space).</p>
 
 
