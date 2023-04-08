@@ -154,7 +154,9 @@ How does vaccination rate for measles differ across regions and school districts
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
-Identify areas of the U.S that have high vaccination rates of measles and further understnad how this data is influenced nby factors inlcuding wealth by a measure of private vs public schools.
+Identify areas of the U.S that have high vaccination rates of measles and further understnad how this data is influenced by factors inlcuding wealth by a measure of private vs public schools.
+
+Updated: In 2018, how does the vaccination rate for measles differ across regions in the US? How do school districts in regions with high vaccination rates vs. low vaccination rates differ (public v. private, enrollment rate, type of geographical region - urban, rural)?
 
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
