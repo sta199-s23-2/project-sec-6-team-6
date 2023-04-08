@@ -149,8 +149,20 @@ library(dplyr)
 
 measles_state <- measles |>
   filter(mmr > 0) |>
-  group_by(state) |>
-  summarise (mean_mmr = mean(mmr))
+  group_by(state) 
+
+```
+
+```{r}
+#| label: plot_measles_state
+
+mean_measles_state <- measles_state |>
+  summarise(mean_mmr = mean(mmr)) 
+
+measles_state |>
+  ggplot(
+    aes(x = mmr, y = state)) +
+  geom_boxplot()
 
 ```
 
