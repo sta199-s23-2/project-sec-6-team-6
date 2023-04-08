@@ -143,10 +143,14 @@ tablemeasles |>
 ```
 
 ```{r}
+#| label: mean_mmr_per_state
 
-measles_state <- measles_filtered |>
-  group_by(state)
+library(dplyr)
 
+measles_state <- measles |>
+  filter(mmr > 0) |>
+  group_by(state) |>
+  summarise (mean_mmr = mean(mmr))
 
 ```
 
