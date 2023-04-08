@@ -136,7 +136,17 @@ measles |>
   summarise(max = max(mmr),
             min = min(mmr))
   
+tablemeasles<- measles |>
+  filter(mmr != -1) |>
+  group_by(state) |>
+  filter(mmr == max(mmr) | mmr == min(mmr)) |>
+  summarise(county = county,
+            mmr = mmr) |>
+  arrange(mmr)
+
+tablesmeasles |>
 ```
+
 
 ## Results
 
