@@ -115,7 +115,6 @@ ggplot(mean_vaccination_rate, aes(x = type, y = overall, fill = type)) +
        y = "Mean Vaccination Rate") +
   theme_bw()
 
-
 ```
 
 state highest vs. lowest (county x, county y)
@@ -135,7 +134,13 @@ tablemeasles<- measles |>
             mmr = mmr) |>
   arrange(mmr)
 
-tablesmeasles |>
+tablemeasles |>
+  group_by(county, state) |>
+  summarize(county = county,
+             state = state,
+             mmr = mmr) |>
+  distinct()
+  
 ```
 
 
