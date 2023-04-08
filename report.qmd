@@ -13,8 +13,6 @@ execute:
 
 library(tidyverse)
 library(leaflet)
-library(raster)
-library(viridis)
 ```
 
 ## Introduction and Data
@@ -32,6 +30,7 @@ Counties that don't report vaccination rates
 **Motivation and Context**
 
 The motivation for this project stemmed from the measles dataset from tidytuesday. It was interesting to see how the data set categorically characterized the data. Our team imported the data into R and used the categories as a guide to make our plots and questions. The data as reported in the Wall Street Journal presents a map of measles vaccination rates in schools across the United States, showing that some schools have dangerously low vaccination rates, which increases the risk of measles outbreaks. The data is based on information from the 2018-2019 school year and includes public, private, and charter schools. According to the map, many of the schools with the lowest vaccination rates are in states such as Idaho, Utah, Colorado, and Oregon. The article also notes that measles cases have been on the rise in recent years, and emphasizes the importance of vaccination in preventing the spread of the highly contagious virus. Through this narrative and viewing the raw data we were able to form our hypothesis and question.
+
 
 **Research question and Hypotheses**
 
@@ -56,56 +55,59 @@ glimpse(measles)
 ```{r}
 #| label: filtering-dataset
 
-measles<- measles |>
+measles <- measles |>
+  mutate(region = if_else(county == "NA", "USA", "USA")) |>
   filter(!is.na(county)) |>
+  filter(!is.na(state)) |>
+  filter(!is.na(city)) |>
+  filter(!is.na(lat)) |>
+  filter(!is.na(lng)) |>
   filter(overall >= 0)
 ```
 
+
 ```{r}
-#| eval: false 
+#| label: group-by
 
-USA <- getData("GADM", country = "usa", level = 2)
-
-# Prepare data
-
-mydata <- data.frame(state = c("Iowa", "Oklahoma"),
-                     county = "Adair",
-                     value = c(20, 100),
-                     stringsAsFactors = FALSE)
-
-# I do not know how your actual data is like. In this demonstration,
-# I have data points for Adair in Iowa and Oklahoma. So 
-
-temp <- merge(USA, mydata,
-              by.x = c("NAME_1", "NAME_2"), by.y = c("state", "county"),
-              all.x = TRUE)
-
-# Create a color palette
-mypal <- colorNumeric(palette = "viridis", domain = temp$value, na.color = "grey")
-
-leaflet() |>
-addProviderTiles("OpenStreetMap.Mapnik") |>
-setView(lat = 39.8283, lng = -98.5795, zoom = 4) |>
-addPolygons(data = USA, stroke = FALSE, smoothFactor = 0.2, fillOpacity = 0.3,
-            fillColor = ~mypal(temp$value),
-            popup = paste("Region: ", temp$NAME_2, "<br>",
-                          "Value: ", temp$value, "<br>")) |>
-addLegend(position = "bottomleft", pal = mypal, values = temp$value,
-          title = "Value",
-          opacity = 1)
+measles_map <- measles |>
+  filter(region == "USA")|>
+  group_by(city, state, lat, lng) |>
+  summarise(count = n()) |>
+  arrange(desc(count))
 ```
+
+```{r}
+#| label: US-map-per-county
+
+mycolor <- colorNumeric(palette = 'RdBu', domain = c(1:8), 
+                        reverse = T)
+
+```
+
+```{r}
+#| label: leaflet-map
+
+measles_map |>
+  leaflet() |>
+  addProviderTiles('CartoDB') |>
+  addCircleMarkers(radius = ~0.01*count, 
+                   color = ~mycolor(count),
+                   popup = ~paste0(city, "<br/>",
+                                   count)) |>
+  addLegend(pal = mycolor, 
+            values = c(1:8),
+            opacity = 0.75,
+            title = "Count",
+            position = 'topleft')
+
+```
+
 
 scatter plot, points are states
 
 tables of states
 
 public vs private
-
-```{r}
-measles<- measles |>
-  filter(!is.na(county)) |>
-  filter(overall >= 0)
-```
 
 ```{r}
 
@@ -117,7 +119,7 @@ mean_vaccination_rate <- aggregate(overall ~ type, measles_filtered, mean)
 
 ggplot(mean_vaccination_rate, aes(x = type, y = overall, fill = type)) +
   geom_bar(stat = "identity") +
-  labs(title = "Vaccination Rates by School Type", 
+  labs(title = "Figure 1 Vaccination Rates by School Type", 
        x = "School Type", 
        y = "Mean Vaccination Rate") +
   theme_bw()
@@ -138,4 +140,4 @@ measles |>
 
 ## Results
 
-The graph showing the average vaccination rates between private and public schools seems to show a higher average vaccination rate for public schools. This is possibly due to local government rules and control over public schools in which students may be mandated to get vaccinated. Whereas in private schools it may have been more up to choice and out of government control.
+Figure 1 - The graph showing the average vaccination rates between private and public schools seems to show a higher average vaccination rate for public schools. This is possibly due to local government rules and control over public schools in which students may be mandated to get vaccinated. Whereas in private schools it may have been more up to choice and out of government control.
