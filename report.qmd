@@ -129,15 +129,15 @@ measles |>
 tablemeasles<- measles |>
   filter(mmr != -1) |>
   group_by(state) |>
-  filter(mmr == max(mmr) | mmr == min(mmr)) |>
+  filter(mmr %in% max(mmr) | mmr %in% min(mmr)) |>
   summarise(county = county,
             mmr = mmr) |>
   arrange(mmr)
 
 tablemeasles |>
   group_by(county, state) |>
-  summarize(county = county,
-             state = state,
+  summarize(county = str_to_title(county),
+             state = str_to_title(state),
              mmr = mmr) |>
   distinct()
   
