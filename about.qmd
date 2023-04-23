@@ -4,10 +4,9 @@ format: html
 editor: visual
 ---
 
-This project was developed by **\[team name\]** For [STA 199: Introduction to Data Science](https://sta199-s23-2.github.io/) at Duke University. The team is comprised of the following team members.
+This project was developed by **Team Six** For [STA 199: Introduction to Data Science](https://sta199-s23-2.github.io/) at Duke University. The team is comprised of the following team members.
 
--   Team member 1: One sentence description of Team member 1 (e.g., year, major, etc.).
--   Team member 2: Austin is a class of 2025 sophomore majoring statistics and psychology.
+-   Sigrid Real-Aguilar: Sigrid is a class of 2025 sophomore majoring in chemistry and minoring in Italian.
+-   Austin: Austin is a class of 2025 sophomore majoring in statistics and psychology.
 -   Cristofer Navas: Class of 2025 student at Duke University majoring in biology and minoring in chemistry.
--   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.).
--   ...
+-   Miran Bhima: One sentence description of Team member 4 (e.g., year, major, etc.).

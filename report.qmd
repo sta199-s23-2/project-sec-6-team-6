@@ -24,9 +24,9 @@ library(leaflet)
 
 **Note:**
 
-We saw negative values, but we don't know what it means
+We saw negative values, but we don't know what it means - perhaps these suggest that the schools did/do not report vaccination rates.
 
-Counties that don't report vaccination rates
+Full disclosure: In the first visualization, there are some data points in Asia, suggesting that some of the schools are located in Asia, but we are working on removing these. Also, for now the first visualization has "eval: FALSE" to facilitate pushing and pulling on GitHub (leaflet takes up a lot of space).
 
 **Motivation and Context**
 
@@ -45,7 +45,7 @@ Vaccination data is listed under HIPAA as protected health information and there
 visualizations and summary statistics
 
 ```{r}
-#| label: Data
+#| label: data
 
 measles <- readr::read_csv('data/measles.csv')
 
@@ -53,7 +53,7 @@ glimpse(measles)
 ```
 
 ```{r}
-#| label: filtering-dataset
+#| label: filtering_measles_dataset
 
 measles <- measles |>
   filter(!is.na(lat)) |>
@@ -62,7 +62,7 @@ measles <- measles |>
 ```
 
 ```{r}
-#| label: group-by
+#| label: creating_measles_map
 
 measles_map <- measles |>
   group_by(name, city, state, lat, lng) |>
@@ -71,7 +71,7 @@ measles_map <- measles |>
 ```
 
 ```{r}
-#| label: US-map-per-county
+#| label: US_map_per_county
 
 mycolor <- colorNumeric(palette = 'RdBu', domain = c(-2:100), 
                         reverse = T)
@@ -79,7 +79,7 @@ mycolor <- colorNumeric(palette = 'RdBu', domain = c(-2:100),
 ```
 
 ```{r}
-#| label: leaflet-map
+#| label: leaflet_map
 #| eval: FALSE
 
 measles_map |>
@@ -100,7 +100,7 @@ measles_map |>
 Figure 1. Each data point represents a school, and the color represents the mmr vaccination rate at that school (reported) - where a dark blue would represent low vaccination rates (if any) and dark red would represent almost 100% (if not 100%) vaccination rates. This visualization will be used to 1) understand variability of vaccination rates in schools across different states, and 2) help us create valid connections between states that have substantially different mmr vaccination rates.
 
 ```{r}
-
+#| label: filtering_measles
 
 measles_filtered <- measles[measles$type %in% c("Public", "Private"), ]
 
@@ -119,6 +119,8 @@ ggplot(mean_vaccination_rate, aes(x = type, y = overall, fill = type)) +
 state highest vs. lowest (county x, county y)
 
 ```{r}
+#| label: table_measles
+
 measles |>
   filter(mmr != -1) |>
   group_by(state) |>
@@ -166,10 +168,10 @@ high_low_state_mean <- measles_state |>
 high_low_state_mean |>
   ggplot(
     aes(x = mmr, y = state)) +
-  geom_boxplot() + 
-  labs(x = "mmr vaccination rate (%)",
-       y = "state",
-       title = "States with Highest and Lowest Reported MMR Vaccination Rates")
+  geom_boxplot() +
+  labs(title = "States with Highest and Lowest Reported MMR Vaccination Rates", 
+       x = "MMR Vaccination Rate (%)", 
+       y = "State")
 
 ```
 
@@ -191,6 +193,10 @@ Figure 1 - This visualization answers the 1st research question by showing which
 
 Figure 2 - The graph showing the average vaccination rates between private and public schools seems to show a higher average vaccination rate for public schools. This is possibly due to local government rules and control over public schools in which students may be mandated to get vaccinated. Whereas in private schools it may have been more up to choice and out of government control.
 
+<<<<<<< HEAD
 Figure 3 - To explore if there is a relationship between urban and rural status and MMR vaccination rate, first, the states with the highest (Massachusetts, Illinois, and Pennsylvania) and lowest (Arkansas, Washington, and Minnesota) mean MMR vaccination rates were plotted. On its own this does not display any relation of urban or rural status to percentage of MMR vaccination rates, so information, provided by Iowa State University, on the 2010 U.S. Decenial Cenus was referenced \[1\]. The percentage of the total population in urban areas per each state was found: Massachusetts (92%), Illinois (88.5%), Pennsylvania (78.7%), Arkansas (56.2%), Washington (84.1%), and Minnesota (73.3%). There appears to be a weak correlation between urban/rural status of each state and MMR vaccination rate, but to a slight degree there is a trend. For instance, the state with the most drastic difference in mean MMR vaccination rate is Arkansas (80.49%) when compared to states with the highest mean MMR vaccination rates (\>95%). Relatedely, Arkansas also has a significantly lower percentage of the total population in urban areas. States like Massachusetts and Illinois hold comparably higher percentages of the total population in urban areas *and* hold the highest mean MMR vaccination rates, 97.04% & 97.39%, respectively. However, states like Washington weaken the correlation by having a high percentage of the total population in urban areas, but reporting a comparably low mean MMR vaccination rate (89.3%).
 
 Full disclosure: In the first visualization, there are some data points in Asia, suggesting that some of the schools are located in Asia, but we are working on removing these. Also, for now the first visualization has "eval: FALSE" to facilitate pushing and pulling on GitHub (leaflet takes up a lot of space).
+=======
+Figure 3 - To explore if there is a relationship between urban and rural status and MMR vaccination rate, first, the states with the highest (Massachusetts, Illinois, and Pennsylvania) and lowest (Arkansas, Washington, and Minnesota) mean MMR vaccination rates were plotted. On its own this does not display any relation of urban or rural status to percentage of MMR vaccination rates, so information, provided by Iowa State University, on the 2010 U.S. Decenial Cenus was referenced [1]. The percentage of the total population in urban areas per each state was found: Massachusetts (92%), Illinois (88.5%), Pennsylvania (78.7%), Arkansas (56.2%), Washington (84.1%), and Minnesota (73.3%). There appears to be a weak correlation between urban/rural status of each state and MMR vaccination rate, but to a slight degree there is a trend. For instance, the state with the most drastic difference in mean MMR vaccination rate is Arkansas (80.49%) when compared to states with the highest mean MMR vaccination rates (\>95%). Relatedely, Arkansas also has a significantly lower percentage of the total population in urban areas. States like Massachusetts and Illinois hold comparably higher percentages of the total population in urban areas *and* hold the highest mean MMR vaccination rates, 97.04% & 97.39% respectively. However, states like Washington weaken the correlation by having a high percentage of the total population in urban areas, but reporting a comparably low mean MMR vaccination rate (89.3%).
+>>>>>>> 290387aca1f766ff77fd199581f4b4e7ee212e03
