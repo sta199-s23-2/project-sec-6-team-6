@@ -18,7 +18,7 @@ library(leaflet)
 
 ## Introduction and Data
 
-**Research question:** In 2018, how does the vaccination rate for measles differ across regions in the US? How do school districts in regions with high vaccination rates vs. low vaccination rates differ (public v. private, enrollment rate, type of geographical region - urban, rural)?
+**Research question:** In 2018, how does the vaccination rate for measles differ across regions in the US? How do school districts in regions with high vaccination rates vs. low vaccination rates differ (public v. private, enrollment statistics, type of geographical region - urban, rural)?
 
 **Hypothesis:** It is expected that states with higher rates of urbanization will have higher vaccination rates for mmr. It is also expected that schools in these states will have higher vaccination rates, differing mainly on whether they are private or public (whereby private may have higher rates).
 
@@ -35,6 +35,10 @@ The motivation for this project stemmed from the measles dataset from tidytuesda
 **Ethical Issues**
 
 Vaccination data is listed under HIPAA as protected health information and therefore cannot be shared without patient consent. In certain areas, vaccine data is not required for schools as well. The data may also be used to discriminate against certain areas unjustly. The sample population does not all benefit equally from our research. Some areas may also be more or less receptive to revealing their vaccination information so the study may not impact our target population equally.
+
+**Limitations**
+  
+Some states do not require schools to report MMR vaccination data, thus resulting in a lack of information for a few states. This results in inconclusive data from those states, and they will not be considered for this research analysis.
 
 **Citing Sources**
 
@@ -145,6 +149,25 @@ tablemeasles |>
 ```
 
 ```{r}
+#| label: enrollment_rate
+
+measles |>
+  filter(type != 'NA') |>
+  ggplot(
+    aes(x = enroll, y = mmr, color = type)
+    ) +
+  geom_point(alpha = 0.3) +
+  facet_wrap("type", ncol = 3) +
+  labs(x = "Enrollment (in #s)", 
+       y = "Vaccination Rate",
+       title = "Does enrollment number effect vaccination rates?",
+       color = "School Type") +
+  theme(axis.title.x = element_text(vjust = -1))
+
+```
+Figure 3. No data was reported for BOCES, and non public schools. This visualization refutes the idea that enrollment numbers influences reported MMR vaccination rates, though it may show that high enrollment numbers for public schools and for other school types (not including BOCES, and non public schools) suggests a higher MMR vaccination rate reported.
+
+```{r}
 #| label: mean_mmr_per_state
 
 library(dplyr)
@@ -175,7 +198,7 @@ high_low_state_mean |>
 
 ```
 
-Figure 3. This plot represents the six states with the highest and lowest MMR vaccination rates from the total states sampled. The states with the lowest reported MMR vaccination rates is Arkansas, Washington, and Minnesota. The states with the highest reported MMR vaccination rates is Massachusetts, Illinois, and Pennsylvania.
+Figure 4. This plot represents the six states with the highest and lowest MMR vaccination rates from the total states sampled. The states with the lowest reported MMR vaccination rates is Arkansas, Washington, and Minnesota. The states with the highest reported MMR vaccination rates is Massachusetts, Illinois, and Pennsylvania.
 
 *Inference*
 
@@ -193,10 +216,9 @@ Figure 1 - This visualization answers the 1st research question by showing which
 
 Figure 2 - The graph showing the average vaccination rates between private and public schools seems to show a higher average vaccination rate for public schools. This is possibly due to local government rules and control over public schools in which students may be mandated to get vaccinated. Whereas in private schools it may have been more up to choice and out of government control.
 
-<<<<<<< HEAD
-Figure 3 - To explore if there is a relationship between urban and rural status and MMR vaccination rate, first, the states with the highest (Massachusetts, Illinois, and Pennsylvania) and lowest (Arkansas, Washington, and Minnesota) mean MMR vaccination rates were plotted. On its own this does not display any relation of urban or rural status to percentage of MMR vaccination rates, so information, provided by Iowa State University, on the 2010 U.S. Decenial Cenus was referenced \[1\]. The percentage of the total population in urban areas per each state was found: Massachusetts (92%), Illinois (88.5%), Pennsylvania (78.7%), Arkansas (56.2%), Washington (84.1%), and Minnesota (73.3%). There appears to be a weak correlation between urban/rural status of each state and MMR vaccination rate, but to a slight degree there is a trend. For instance, the state with the most drastic difference in mean MMR vaccination rate is Arkansas (80.49%) when compared to states with the highest mean MMR vaccination rates (\>95%). Relatedely, Arkansas also has a significantly lower percentage of the total population in urban areas. States like Massachusetts and Illinois hold comparably higher percentages of the total population in urban areas *and* hold the highest mean MMR vaccination rates, 97.04% & 97.39%, respectively. However, states like Washington weaken the correlation by having a high percentage of the total population in urban areas, but reporting a comparably low mean MMR vaccination rate (89.3%).
+Figure 3 - The data reported for Charter, Kindergarten and Private schools shows that for schools with no new enrollments the vaccination rates reported differ significantly. For public schools we see a little more diversity, but no strong correlation either. Public schools with 0 new enrollments may have high or even no vaccination rates reported, but generally we see that a high enrollment rate rarely leads to low vaccination rates (this also applies to Charter, Kindergarten, and private schools). This visualization answers the question on whether or not enrollment numbers has an effect on vaccination rates, for which it was determined, enrollment rate is not a determining factor.
 
-Full disclosure: In the first visualization, there are some data points in Asia, suggesting that some of the schools are located in Asia, but we are working on removing these. Also, for now the first visualization has "eval: FALSE" to facilitate pushing and pulling on GitHub (leaflet takes up a lot of space).
+Figure 4 - To explore if there is a relationship between urban and rural status and MMR vaccination rate, first, the states with the highest (Massachusetts, Illinois, and Pennsylvania) and lowest (Arkansas, Washington, and Minnesota) mean MMR vaccination rates were plotted. On its own this does not display any relation of urban or rural status to percentage of MMR vaccination rates, so information, provided by Iowa State University, on the 2010 U.S. Decenial Cenus was referenced \[1\]. The percentage of the total population in urban areas per each state was found: Massachusetts (92%), Illinois (88.5%), Pennsylvania (78.7%), Arkansas (56.2%), Washington (84.1%), and Minnesota (73.3%). There appears to be a weak correlation between urban/rural status of each state and MMR vaccination rate, but to a slight degree there is a trend. For instance, the state with the most drastic difference in mean MMR vaccination rate is Arkansas (80.49%) when compared to states with the highest mean MMR vaccination rates (\>95%). Relatedly, Arkansas also has a significantly lower percentage of the total population in urban areas. States like Massachusetts and Illinois hold comparably higher percentages of the total population in urban areas *and* hold the highest mean MMR vaccination rates, 97.04% & 97.39%, respectively. However, states like Washington weaken the correlation by having a high percentage of the total population in urban areas, but reporting a comparably low mean MMR vaccination rate (89.3%).
 
-Figure 3 - To explore if there is a relationship between urban and rural status and MMR vaccination rate, first, the states with the highest (Massachusetts, Illinois, and Pennsylvania) and lowest (Arkansas, Washington, and Minnesota) mean MMR vaccination rates were plotted. On its own this does not display any relation of urban or rural status to percentage of MMR vaccination rates, so information, provided by Iowa State University, on the 2010 U.S. Decenial Cenus was referenced [1]. The percentage of the total population in urban areas per each state was found: Massachusetts (92%), Illinois (88.5%), Pennsylvania (78.7%), Arkansas (56.2%), Washington (84.1%), and Minnesota (73.3%). There appears to be a weak correlation between urban/rural status of each state and MMR vaccination rate, but to a slight degree there is a trend. For instance, the state with the most drastic difference in mean MMR vaccination rate is Arkansas (80.49%) when compared to states with the highest mean MMR vaccination rates (\>95%). Relatedely, Arkansas also has a significantly lower percentage of the total population in urban areas. States like Massachusetts and Illinois hold comparably higher percentages of the total population in urban areas *and* hold the highest mean MMR vaccination rates, 97.04% & 97.39% respectively. However, states like Washington weaken the correlation by having a high percentage of the total population in urban areas, but reporting a comparably low mean MMR vaccination rate (89.3%).
+Full disclosure: The first visualization has "eval: FALSE" to facilitate pushing and pulling on GitHub (leaflet takes up a lot of space).
 
