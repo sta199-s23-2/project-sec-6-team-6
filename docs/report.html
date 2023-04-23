@@ -195,19 +195,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="introduction-and-data" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-and-data">Introduction and Data</h2>
+<p><strong>Motivation and Context</strong></p>
+<p>The motivation for this project stemmed from the measles dataset from tidytuesday. It was interesting to see how the data set categorically characterized the data. Our team imported the data into R and used the categories as a guide to make our plots and questions. The data as reported in the Wall Street Journal presents a map of measles vaccination rates in schools across the United States, showing that some schools have dangerously low vaccination rates, which increases the risk of measles outbreaks. The data is based on information from the 2018-2019 school year and includes public, private, and charter schools. According to the map, many of the schools with the lowest vaccination rates are in states such as Idaho, Utah, Colorado, and Oregon. The article also notes that measles cases have been on the rise in recent years, and emphasizes the importance of vaccination in preventing the spread of the highly contagious virus. Through this narrative and viewing the raw data we were able to form our hypothesis and question.</p>
 <p><strong>Research question:</strong> In 2018, how does the vaccination rate for measles differ across regions in the US? How do school districts in regions with high vaccination rates vs.&nbsp;low vaccination rates differ (public v. private, enrollment statistics, type of geographical region - urban, rural)?</p>
 <p><strong>Hypothesis:</strong> It is expected that states with higher rates of urbanization will have higher vaccination rates for mmr. It is also expected that schools in these states will have higher vaccination rates, differing mainly on whether they are private or public (whereby private may have higher rates).</p>
 <p><strong>Note:</strong></p>
 <p>We saw negative values, but we don’t know what it means - perhaps these suggest that the schools did/do not report vaccination rates.</p>
 <p>Full disclosure: In the first visualization, there are some data points in Asia, suggesting that some of the schools are located in Asia, but we are working on removing these. Also, for now the first visualization has “eval: FALSE” to facilitate pushing and pulling on GitHub (leaflet takes up a lot of space).</p>
-<p><strong>Motivation and Context</strong></p>
-<p>The motivation for this project stemmed from the measles dataset from tidytuesday. It was interesting to see how the data set categorically characterized the data. Our team imported the data into R and used the categories as a guide to make our plots and questions. The data as reported in the Wall Street Journal presents a map of measles vaccination rates in schools across the United States, showing that some schools have dangerously low vaccination rates, which increases the risk of measles outbreaks. The data is based on information from the 2018-2019 school year and includes public, private, and charter schools. According to the map, many of the schools with the lowest vaccination rates are in states such as Idaho, Utah, Colorado, and Oregon. The article also notes that measles cases have been on the rise in recent years, and emphasizes the importance of vaccination in preventing the spread of the highly contagious virus. Through this narrative and viewing the raw data we were able to form our hypothesis and question.</p>
 <p><strong>Ethical Issues</strong></p>
-<p>Vaccination data is listed under HIPAA as protected health information and therefore cannot be shared without patient consent. In certain areas, vaccine data is not required for schools as well. The data may also be used to discriminate against certain areas unjustly. The sample population does not all benefit equally from our research. Some areas may also be more or less receptive to revealing their vaccination information so the study may not impact our target population equally.</p>
+<p>Vaccination data is listed under HIPAA as protected health information and therefore cannot be shared without patient consent. In certain areas, vaccine data is not required for schools as well. The data may also be used to discriminate against certain areas unjustly. The US does not all benefit equally from our research. Some areas may also be more or less receptive to revealing their vaccination information so the study may not impact our target population equally.</p>
 <p><strong>Limitations</strong></p>
 <p>Some states do not require schools to report MMR vaccination data, thus resulting in a lack of information for a few states. This results in inconclusive data from those states, and they will not be considered for this research analysis.</p>
 <p><strong>Citing Sources</strong></p>
@@ -440,8 +441,21 @@ Caused by warning in `state == c("Illinois", "Massachusetts", "Pennsylvania", "A
 </div>
 </div>
 <p>Figure 4. This plot represents the six states with the highest and lowest MMR vaccination rates from the total states sampled. The states with the lowest reported MMR vaccination rates is Arkansas, Washington, and Minnesota. The states with the highest reported MMR vaccination rates is Massachusetts, Illinois, and Pennsylvania.</p>
-<p><em>Inference</em></p>
-<p>For this hypothesis test, let: <span class="math inline">\(\mu_priv\)</span> = the true (population) mean amount of The truw (population) mean price per guest of airbnbs in NC 2020 is larger than $60</p>
+<p><em>Models &amp; Prediction</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>int_model <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(mmr <span class="sc">~</span> type <span class="sc">*</span> enroll, <span class="at">data =</span> measles) </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(int_model)<span class="sc">$</span>adj.r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2799859</code></pre>
+</div>
+</div>
+<p>The interactive model has an adjusted r-squared of 0.2799859. [ENTER WHICH ONE IS BETTER] vastly improve the adjusted r squared suggesting that this model has a better overall fit.</p>
+<p>Fitted model equation: <span class="math inline">\(\hat{MMR} = 83.57550807\)</span> THIS NEEDS FIXING</p>
+<p>Here we make a prediction based on that better model: so say a private school had this enrollment rate, X will happen AND WE VISUALIZE <em>Inference</em></p>
+<p>For this hypothesis test, let: <span class="math inline">\(\mu_priv\)</span> = the true (population) mean amount of The true (population) mean price per guest of airbnbs in NC 2020 is larger than $60</p>
 <p>Null Hypothesis <span class="math inline">\(\H_o\)</span>:</p>
 </section>
 <section id="results" class="level2">
