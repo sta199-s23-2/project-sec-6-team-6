@@ -236,6 +236,8 @@ glance(int_model_additive)$adj.r.squared
 
 ```
 
+The additive model has an adjusted r-squared of 0.205.
+
 ```{r}
 #| label: prediction
 
