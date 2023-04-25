@@ -128,6 +128,12 @@ $H_0: \bar x_{public}-\bar x_{private}=0$ difference in mean vaccination rate is
 $H_A: \bar x_{public}-\bar x_{private}\ne0$ difference in mean vaccination rate is not 0, there is a significant difference
 
 ```{r}
+```
+
+```{r}
+```
+
+```{r}
 #| label: hypothesis-test-school-type
 set.seed(17)
 

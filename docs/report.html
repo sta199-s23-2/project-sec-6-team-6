@@ -305,6 +305,12 @@ can override using the `.groups` argument.</code></pre>
 <p><span class="math inline">\(H_0: \bar x_{public}-\bar x_{private}=0\)</span> difference in mean vaccination rate is 0, there is no significant difference</p>
 <p><span class="math inline">\(H_A: \bar x_{public}-\bar x_{private}\ne0\)</span> difference in mean vaccination rate is not 0, there is a significant difference</p>
 <div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">17</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>measles_filtered <span class="sc">|&gt;</span></span>
@@ -378,9 +384,14 @@ approximation based on the number of `reps` chosen in the `generate()` step. See
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">county =</span> <span class="fu">str_to_title</span>(county),</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">state =</span> <span class="fu">str_to_title</span>(state),</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">mmr =</span> mmr) <span class="sc">|&gt;</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">county =</span> <span class="fu">str_to_title</span>(county),</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">state =</span> <span class="fu">str_to_title</span>(state),</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">mmr =</span> mmr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'county', 'state'. You can override using
+the `.groups` argument.
+`summarise()` has grouped output by 'county', 'state'. You can override using
 the `.groups` argument.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
