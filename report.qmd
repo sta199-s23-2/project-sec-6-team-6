@@ -127,6 +127,32 @@ ggplot(mean_vaccination_rate, aes(x = type, y = overall, fill = type)) +
 
 state highest vs. lowest (county x, county y)
 
+$H_0: \bar x_{public}-\bar x_{private}=0$ difference in mean vaccination rate is 0, there is no significant difference
+
+$H_A: \bar x_{public}-\bar x_{private}\ne0$ difference in mean vaccination rate is not 0, there is a significant difference
+
+```{r}
+#| label: hypothesis-test-school-type
+set.seed(17)
+
+measles_filtered |>
+  group_by(type) |>
+  summarise(m = mean(mmr))
+
+obs_stat_type_test <- 91.78767-62.43583
+
+boot_null_type <- measles_filtered |>
+  specify(response = mmr , explanatory = type) |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in means", order = c("Public", "Private"))
+
+boot_null_type |>
+  get_p_value(obs_stat = obs_stat_type_test, direction = "greater")
+```
+
+We find evidence to reject the null hypothesis (p \< .05) and we find strong evidence for the alternative hypothesis that the vaccination rate in public schools is significantly higher than in private schools.
+
 ```{r}
 #| label: table_measles
 
@@ -139,17 +165,20 @@ measles |>
 tablemeasles <- measles |>
   filter(mmr != -1) |>
   group_by(state) |>
-  filter(mmr == max(mmr) | mmr == min(mmr)) |>
+  filter(mmr %in% max(mmr) | mmr %in% min(mmr)) |>
   summarise(county = county,
             mmr = mmr) |>
   arrange(mmr)
 
 tablemeasles |>
   group_by(county, state) |>
-  summarize(county = county,
-             state = state,
+  summarize(county = str_to_title(county),
+             state = str_to_title(state),
              mmr = mmr) |>
-  distinct()
+  distinct() |>
+  summarize(county = str_to_title(county),
+             state = str_to_title(state),
+             mmr = mmr)
   
 ```
 
