@@ -303,6 +303,9 @@ The additive model has an adjusted r-squared of 0.02078126.
 The higher adjusted r squared for the interactive model, over the additive one, suggests that the interactive model has a better overall fit.
 
 ```{r}
+#| label: int-linear-reg2
+#| echo: false
+
 
 int_model2 <- linear_reg() |>
   set_engine("lm") |>
@@ -314,6 +317,8 @@ glance(int_model2)$adj.r.squared
 ```
 
 ```{r}
+#| label: int-linear-reg3
+#| echo: false
 
 int_model3 <- linear_reg() |>
   set_engine("lm") |>
