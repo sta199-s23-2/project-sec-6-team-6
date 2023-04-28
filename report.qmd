@@ -191,11 +191,13 @@ tablemeasles |>
   distinct() |>
   summarize(county = str_to_title(county),
              state = str_to_title(state),
-             mmr = mmr)
+             mmr = mmr) |>
+  arrange(mmr, state)
   
 ```
 
 Figure 3.
+This graph shows the highest and lowest mmr counties by state. Several states have multiple counties with 100% mmr vaccination rate, but few to none have matching lowest mmrs between counties. If data was not available on the mmr rate of a school, it was removed.
 
 ```{r}
 #| label: enrollment_rate
@@ -360,8 +362,8 @@ Figure 1 - This visualization answers the 1st research question by showing which
 
 Figure 2 - To explore if there is a relationship between urban and rural status and MMR vaccination rate, first, the states with the highest (Massachusetts, Illinois, and Pennsylvania) and lowest (Arkansas, Washington, and Minnesota) mean MMR vaccination rates were plotted. On its own this does not display any relation of urban or rural status to percentage of MMR vaccination rates, so information, provided by Iowa State University, on the 2010 U.S. Decennial Cenus was referenced \[1\]. The percentage of the total population in urban areas per each state was found: Massachusetts (92%), Illinois (88.5%), Pennsylvania (78.7%), Arkansas (56.2%), Washington (84.1%), and Minnesota (73.3%). There appears to be a weak correlation between urban/rural status of each state and MMR vaccination rate, but to a slight degree there is a trend. For instance, the state with the most drastic difference in mean MMR vaccination rate is Arkansas (80.49%) when compared to states with the highest mean MMR vaccination rates (\>95%). Relatedly, Arkansas also has a significantly lower percentage of the total population in urban areas. States like Massachusetts and Illinois hold comparably higher percentages of the total population in urban areas *and* hold the highest mean MMR vaccination rates, 97.04% & 97.39%, respectively. However, states like Washington weaken the correlation by having a high percentage of the total population in urban areas, but reporting a comparably low mean MMR vaccination rate (89.3%).
 
-Figure 3 -
+Figure 3 - The data reported for maximum and minimum average vaccination rate by county in each state showed that most states had a maximum vaccination rate of 99 or 100%. On the other hand, minimum vaccination rates ranged from 1% to 96%. States often had several counties tied at the maximum. One noteworthy finding is that California had several counties all at 99, which is odd. It's very likely that some of the data was influenced by the removal of NA values, and there was also one minimum school missing its County in Missouri.
 
 Figure 4 - The data reported for Charter, Kindergarten and Private schools shows that for schools with no new enrollments the vaccination rates reported differ significantly. For public schools we see a little more diversity, but no strong correlation either. Public schools with 0 new enrollments may have high or even no vaccination rates reported, but generally we see that a high enrollment rate rarely leads to low vaccination rates (this also applies to Charter, Kindergarten, and private schools). This visualization answers the question on whether or not enrollment numbers has an effect on vaccination rates, for which it was determined, enrollment rate is not a determining factor.
 
-Figure 5 - The graph showing the average vaccination rates between private and public schools seems to show a higher average vaccination rate for public schools. This is possibly due to local government rules and control over public schools in which students may be mandated to get vaccinated. Whereas in private schools it may have been more up to choice and out of government control.
+Figure 5 - The graph showing the average vaccination rates between private and public schools seems to show a higher average vaccination rate for public schools. This is possibly due to local government rules and control over public schools in which students may be mandated to get vaccinated. Whereas in private schools it may have been more up to choice and out of government control. The resulting hypothesis test showed that there is a significant difference in vaccination rate between public schools and private school (p<.05). This number may not be wholly accurate due to the removal of much private school data, but we assume the difference can be attributed to a lack of vaccine mandate within private schools.
