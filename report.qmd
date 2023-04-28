@@ -255,7 +255,8 @@ We find evidence to reject the null hypothesis (p \< .05) and we find strong evi
 
 int_model <- linear_reg() |>
   set_engine("lm") |>
-  fit(mmr ~ type * enroll, data = measles) 
+  fit(mmr ~ type * enroll * state, data = measles) 
+tidy(int_model)
 
 glance(int_model)$adj.r.squared
 ```
@@ -268,7 +269,8 @@ The interactive model has an adjusted r-squared of 0.2799859.
 
 add_model <- linear_reg() |>
   set_engine("lm") |>
-  fit(mmr ~ type + enroll, data = measles) 
+  fit(mmr ~ type + enroll + state, data = measles) 
+tidy(add_model)
 
 glance(add_model)$adj.r.squared
 
@@ -281,6 +283,7 @@ The higher adjusted r squared for the interactive model, over the additive one, 
 
 ```{r}
 #| label: prediction
+#| eval: false
 #| echo: false
 
 predict(int_model, data.frame(type = "Public", enroll = 100))
