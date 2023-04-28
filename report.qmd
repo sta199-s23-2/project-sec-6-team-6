@@ -80,6 +80,7 @@ measles_map <- measles |>
   summarise(mmr = mmr) 
 
 ```
+
 ```{r}
 #| label: mean_mmr_per_state
 #| echo: false
@@ -122,6 +123,7 @@ measles_map |>
 ```
 
 Figure 1. Each data point represents a school, and the color represents the mmr vaccination rate at that school (reported) - where a dark blue would represent low vaccination rates (if any) and dark red would represent almost 100% (if not 100%) vaccination rates. This visualization will be used to 1) understand variability of vaccination rates in schools across different states, and 2) help us create valid connections between states that have substantially different mmr vaccination rates.
+
 ```{r}
 #| label: plot_measles_state
 #| echo: false
@@ -142,6 +144,24 @@ high_low_state_mean |>
        y = "State")
 
 ```
+
+state highest vs. lowest (county x, county y) $H_0: \bar x_{public}-\bar x_{private}=0$ difference in mean vaccination rate is 0, there is no significant difference $H_A: \bar x_{public}-\bar x_{private}\ne0$ difference in mean vaccination rate is not 0, there is a significant difference
+
+```{r}
+#| label: hypothesis-test-school-type
+set.seed(17)
+
+boot_hyp_test <- measles_filtered |>
+  specify(response = mmr , explanatory = type) |>
+  generate(reps = 1000, type = "bootstrap") |>
+  calculate(stat = "diff in means", order = c("Public", "Private"))
+
+boot_hyp_test |> 
+  summarize(lower = quantile(stat , 0.025),
+            upper = quantile(stat , 0.975))
+```
+
+We find evidence to reject the null hypothesis and we find strong evidence toward the alternative hypothesis that the vaccination rate in public schools is significantly higher than in private schools.
 
 Figure 2. This plot represents the six states with the highest and lowest MMR vaccination rates from the total states sampled. The states with the lowest reported MMR vaccination rates is Arkansas, Washington, and Minnesota. The states with the highest reported MMR vaccination rates is Massachusetts, Illinois, and Pennsylvania.
 
@@ -215,7 +235,8 @@ ggplot(mean_vaccination_rate, aes(x = type, y = overall, fill = type)) +
   theme_bw()
 
 ```
-Figure 5. 
+
+Figure 5.
 
 State highest vs. lowest (county x, county y)
 
@@ -270,7 +291,7 @@ The interactive model has an adjusted r-squared of 0.2799859.
 add_model <- linear_reg() |>
   set_engine("lm") |>
   fit(mmr ~ type + enroll + state, data = measles) 
-tidy(add_model)
+tidy(int_model_additive)
 
 glance(add_model)$adj.r.squared
 
@@ -280,6 +301,28 @@ glance(add_model)$adj.r.squared
 The additive model has an adjusted r-squared of 0.02078126.
 
 The higher adjusted r squared for the interactive model, over the additive one, suggests that the interactive model has a better overall fit.
+
+```{r}
+
+int_model2 <- linear_reg() |>
+  set_engine("lm") |>
+  fit(mmr ~ type * state, data = measles) 
+tidy(int_model2)
+
+glance(int_model2)$adj.r.squared
+
+```
+
+```{r}
+
+int_model3 <- linear_reg() |>
+  set_engine("lm") |>
+  fit(mmr ~ enroll * state, data = measles) 
+tidy(int_model3)
+
+glance(int_model3)$adj.r.squared
+
+```
 
 ```{r}
 #| label: prediction
