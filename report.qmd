@@ -121,11 +121,7 @@ ggplot(mean_vaccination_rate, aes(x = type, y = overall, fill = type)) +
 
 ```
 
-state highest vs. lowest (county x, county y)
-$H_0: \bar x_{public}-\bar x_{private}=0$
-difference in mean vaccination rate is 0, there is no significant difference
-$H_A: \bar x_{public}-\bar x_{private}\ne0$
-difference in mean vaccination rate is not 0, there is a significant difference
+state highest vs. lowest (county x, county y) $H_0: \bar x_{public}-\bar x_{private}=0$ difference in mean vaccination rate is 0, there is no significant difference $H_A: \bar x_{public}-\bar x_{private}\ne0$ difference in mean vaccination rate is not 0, there is a significant difference
 
 ```{r}
 #| label: hypothesis-test-school-type
@@ -140,6 +136,7 @@ boot_hyp_test |>
   summarize(lower = quantile(stat , 0.025),
             upper = quantile(stat , 0.975))
 ```
+
 We find evidence to reject the null hypothesis and we find strong evidence toward the alternative hypothesis that the vaccination rate in public schools is significantly higher than in private schools.
 
 ```{r}
@@ -228,7 +225,8 @@ Figure 4. This plot represents the six states with the highest and lowest MMR va
 
 int_model <- linear_reg() |>
   set_engine("lm") |>
-  fit(mmr ~ type * enroll, data = measles) 
+  fit(mmr ~ type * enroll * state, data = measles) 
+tidy(int_model)
 
 glance(int_model)$adj.r.squared
 ```
@@ -244,7 +242,8 @@ Here we make a prediction based on that better model: so say a private school ha
 
 int_model_additive <- linear_reg() |>
   set_engine("lm") |>
-  fit(mmr ~ type + enroll, data = measles) 
+  fit(mmr ~ type + enroll + state, data = measles) 
+tidy(int_model_additive)
 
 glance(int_model_additive)$adj.r.squared
 
@@ -255,6 +254,7 @@ The additive model has an adjusted r-squared of 0.205.
 
 ```{r}
 #| label: prediction
+#| eval: false
 
 
 new_data <- data.frame(type = "Public", enroll = 100)
