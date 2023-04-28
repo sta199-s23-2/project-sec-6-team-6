@@ -27,11 +27,11 @@ The motivation for this project stemmed from the measles dataset from tidytuesda
 
 **Hypothesis:** It is expected that states with higher rates of urbanization will have higher vaccination rates for mmr. It is also expected that schools in these states will have higher vaccination rates, differing mainly on whether they are private or public (whereby private may have higher rates).
 
-**Note:**
+**The Data:**
 
-We saw negative values, but we don't know what it means - perhaps these suggest that the schools did/do not report vaccination rates.
+Quantitative - vaccination rates
 
-Full disclosure: In the first visualization, there are some data points in Asia, suggesting that some of the schools are located in Asia, but we are working on removing these. Also, for now the first visualization has "eval: FALSE" to facilitate pushing and pulling on GitHub (leaflet takes up a lot of space).
+Categorical - private or public and county and state levels
 
 **Ethical Issues**
 
@@ -39,7 +39,11 @@ Vaccination data is listed under HIPAA as protected health information and there
 
 **Limitations**
 
+We saw negative values, but we don't know what it means - perhaps these suggest that the schools did/do not report vaccination rates.
+
 Some states do not require schools to report MMR vaccination data, thus resulting in a lack of information for a few states. This results in inconclusive data from those states, and they will not be considered for this research analysis.
+
+Full disclosure: In the first visualization, there are some data points in Asia, suggesting that some of the schools are located in Asia, but we are working on removing these. Also, for now the first visualization has "eval: FALSE" to facilitate pushing and pulling on GitHub (leaflet takes up a lot of space).
 
 **Citing Sources**
 
@@ -85,7 +89,7 @@ mycolor <- colorNumeric(palette = 'Blues', domain = c(-2:100),
 
 ```{r}
 #| label: leaflet_map
-#| eval: FALSE
+
 
 measles_map |>
   leaflet() |>
@@ -93,7 +97,7 @@ measles_map |>
   addCircleMarkers(radius = ~ 0.01 * mmr, 
                    color = ~ mycolor(mmr),
                    popup = ~ paste0(name, "<br/>",
-                                   mmr)) |>
+                                   mmr, lat, lng)) |>
   addLegend(pal = mycolor, 
             values = c(-2:100),
             opacity = 0.75,
@@ -209,38 +213,34 @@ Figure 4. This plot represents the six states with the highest and lowest MMR va
 
 int_model <- linear_reg() |>
   set_engine("lm") |>
-  fit(mmr ~ type * enroll, data = measles) 
+  fit(mmr ~ type * enroll, data = measles) |>
+  tidy()
 
 glance(int_model)$adj.r.squared
 ```
 
-The interactive model has an adjusted r-squared of 0.2799859. \[ENTER WHICH ONE IS BETTER\] vastly improve the adjusted r squared suggesting that this model has a better overall fit.
-
-Fitted model equation: $\hat{MMR} = 83.57550807$ THIS NEEDS FIXING
-
-Here we make a prediction based on that better model: so say a private school had this enrollment rate, X will happen AND WE VISUALIZE
+The interactive model has an adjusted r-squared of 0.2799859.
 
 ```{r}
-#| label: additive
+#| label: add-linear-reg
 
-int_model_additive <- linear_reg() |>
+add_model <- linear_reg() |>
   set_engine("lm") |>
   fit(mmr ~ type + enroll, data = measles) 
 
-glance(int_model_additive)$adj.r.squared
+glance(add_model)$adj.r.squared
 
 
 ```
 
-The additive model has an adjusted r-squared of 0.205.
+The additive model has an adjusted r-squared of 0.02078126.
+
+The higher adjusted r squared for the interactive model, over the additive one, suggests that the interactive model has a better overall fit.
 
 ```{r}
 #| label: prediction
 
-
-new_data <- data.frame(type = "Public", enroll = 100)
-predicted_mmr <- predict(int_model, new_data = new_data)
-predicted_mmr
+predict(int_model, data.frame(type = "Public", enroll = 100))
 
 ```
 
