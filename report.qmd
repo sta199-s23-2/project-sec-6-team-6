@@ -10,6 +10,7 @@ execute:
 ```{r}
 #| label: load-pkgs
 #| message: false
+#| echo: false
 
 library(tidyverse)
 library(tidymodels)
@@ -27,17 +28,19 @@ The motivation for this project stemmed from the measles dataset from tidytuesda
 
 **Hypothesis:** It is expected that states with higher rates of urbanization will have higher vaccination rates for mmr. It is also expected that schools in these states will have higher vaccination rates, differing mainly on whether they are private or public (whereby private may have higher rates).
 
-**Note:**
+**The Data:**
 
-We saw negative values, but we don't know what it means - perhaps these suggest that the schools did/do not report vaccination rates.
+Quantitative - vaccination rates
 
-Full disclosure: In the first visualization, there are some data points in Asia, suggesting that some of the schools are located in Asia, but we are working on removing these. Also, for now the first visualization has "eval: FALSE" to facilitate pushing and pulling on GitHub (leaflet takes up a lot of space).
+Categorical - private or public and county and state levels
 
 **Ethical Issues**
 
 Vaccination data is listed under HIPAA as protected health information and therefore cannot be shared without patient consent. In certain areas, vaccine data is not required for schools as well. The data may also be used to discriminate against certain areas unjustly. The US does not all benefit equally from our research. Some areas may also be more or less receptive to revealing their vaccination information so the study may not impact our target population equally.
 
 **Limitations**
+
+We saw negative values, but we don't know what it means - perhaps these suggest that the schools did/do not report vaccination rates.
 
 Some states do not require schools to report MMR vaccination data, thus resulting in a lack of information for a few states. This results in inconclusive data from those states, and they will not be considered for this research analysis.
 
@@ -51,6 +54,7 @@ visualizations and summary statistics
 
 ```{r}
 #| label: data
+#| echo: false
 
 measles <- readr::read_csv('data/measles.csv')
 
@@ -59,24 +63,38 @@ glimpse(measles)
 
 ```{r}
 #| label: filtering_measles_dataset
+#| echo: false
 
 measles <- measles |>
   filter(!is.na(lat)) |>
-  filter(!is.na(lng)) 
+  filter(!is.na(lng))
 
 ```
 
 ```{r}
 #| label: creating_measles_map
+#| echo: false
 
 measles_map <- measles |>
   group_by(name, city, state, lat, lng) |>
   summarise(mmr = mmr) 
 
 ```
+```{r}
+#| label: mean_mmr_per_state
+#| echo: false
+
+library(dplyr)
+
+measles_state <- measles |>
+  filter(mmr > 0) |>
+  group_by(state) 
+
+```
 
 ```{r}
 #| label: US_map_per_county
+#| echo: false
 
 mycolor <- colorNumeric(palette = 'Blues', domain = c(-2:100), 
                         reverse = F)
@@ -85,15 +103,16 @@ mycolor <- colorNumeric(palette = 'Blues', domain = c(-2:100),
 
 ```{r}
 #| label: leaflet_map
-#| eval: FALSE
+#| echo: false
 
 measles_map |>
+  filter(lng < 40) |> #removing points in Asia
   leaflet() |>
   addProviderTiles('CartoDB') |>
   addCircleMarkers(radius = ~ 0.01 * mmr, 
                    color = ~ mycolor(mmr),
                    popup = ~ paste0(name, "<br/>",
-                                   mmr)) |>
+                                   mmr, lat, lng)) |>
   addLegend(pal = mycolor, 
             values = c(-2:100),
             opacity = 0.75,
@@ -103,60 +122,32 @@ measles_map |>
 ```
 
 Figure 1. Each data point represents a school, and the color represents the mmr vaccination rate at that school (reported) - where a dark blue would represent low vaccination rates (if any) and dark red would represent almost 100% (if not 100%) vaccination rates. This visualization will be used to 1) understand variability of vaccination rates in schools across different states, and 2) help us create valid connections between states that have substantially different mmr vaccination rates.
-
 ```{r}
-#| label: filtering_measles
+#| label: plot_measles_state
+#| echo: false
 
-measles_filtered <- measles[measles$type %in% c("Public", "Private"), ]
+mean_measles_state <- measles_state |>
+  summarise(mean_mmr = mean(mmr)) 
 
-mean_vaccination_rate <- aggregate(overall ~ type, measles_filtered, mean)
+high_low_state_mean <- measles_state |>
+  filter(state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", 
+                    "Washington", "Minnesota"))
 
-
-ggplot(mean_vaccination_rate, aes(x = type, y = overall, fill = type)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Figure 2 Vaccination Rates by School Type", 
-       x = "School Type", 
-       y = "Mean Vaccination Rate") +
-  theme_bw()
+high_low_state_mean |>
+  ggplot(
+    aes(x = mmr, y = state)) +
+  geom_boxplot() +
+  labs(title = "States with Highest and Lowest Reported MMR Vaccination Rates", 
+       x = "MMR Vaccination Rate (%)", 
+       y = "State")
 
 ```
 
-state highest vs. lowest (county x, county y)
-
-$H_0: \bar x_{public}-\bar x_{private}=0$ difference in mean vaccination rate is 0, there is no significant difference
-
-$H_A: \bar x_{public}-\bar x_{private}\ne0$ difference in mean vaccination rate is not 0, there is a significant difference
-
-```{r}
-```
-
-```{r}
-```
-
-```{r}
-#| label: hypothesis-test-school-type
-set.seed(17)
-
-measles_filtered |>
-  group_by(type) |>
-  summarise(m = mean(mmr))
-
-obs_stat_type_test <- 91.78767-62.43583
-
-boot_null_type <- measles_filtered |>
-  specify(response = mmr , explanatory = type) |>
-  hypothesize(null = "independence") |>
-  generate(reps = 1000, type = "permute") |>
-  calculate(stat = "diff in means", order = c("Public", "Private"))
-
-boot_null_type |>
-  get_p_value(obs_stat = obs_stat_type_test, direction = "greater")
-```
-
-We find evidence to reject the null hypothesis (p \< .05) and we find strong evidence for the alternative hypothesis that the vaccination rate in public schools is significantly higher than in private schools.
+Figure 2. This plot represents the six states with the highest and lowest MMR vaccination rates from the total states sampled. The states with the lowest reported MMR vaccination rates is Arkansas, Washington, and Minnesota. The states with the highest reported MMR vaccination rates is Massachusetts, Illinois, and Pennsylvania.
 
 ```{r}
 #| label: table_measles
+#| echo: false
 
 measles |>
   filter(mmr != -1) |>
@@ -184,8 +175,11 @@ tablemeasles |>
   
 ```
 
+Figure 3.
+
 ```{r}
 #| label: enrollment_rate
+#| echo: false
 
 measles |>
   filter(type != 'NA') |>
@@ -202,45 +196,62 @@ measles |>
 
 ```
 
-Figure 3. No data was reported for BOCES, and non public schools. This visualization refutes the idea that enrollment numbers influences reported MMR vaccination rates, though it may show that high enrollment numbers for public schools and for other school types (not including BOCES, and non public schools) suggests a higher MMR vaccination rate reported.
+Figure 4. No data was reported for BOCES, and non public schools. This visualization refutes the idea that enrollment numbers influences reported MMR vaccination rates, though it may show that high enrollment numbers for public schools and for other school types (not including BOCES, and non public schools) suggests a higher MMR vaccination rate reported.
 
 ```{r}
-#| label: mean_mmr_per_state
+#| label: filtering_measles
+#| echo: false
 
-library(dplyr)
+measles_filtered <- measles[measles$type %in% c("Public", "Private"), ]
 
-measles_state <- measles |>
-  filter(mmr > 0) |>
-  group_by(state) 
+mean_vaccination_rate <- aggregate(overall ~ type, measles_filtered, mean)
+
+
+ggplot(mean_vaccination_rate, aes(x = type, y = overall, fill = type)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Vaccination Rates by School Type", 
+       x = "School Type", 
+       y = "Mean Vaccination Rate") +
+  theme_bw()
 
 ```
+Figure 5. 
+
+State highest vs. lowest (county x, county y)
+
+$H_0: \bar x_{public}-\bar x_{private}=0$ difference in mean vaccination rate is 0, there is no significant difference
+
+$H_A: \bar x_{public}-\bar x_{private}\ne0$ difference in mean vaccination rate is not 0, there is a significant difference
 
 ```{r}
-#| label: plot_measles_state
+#| label: hypothesis-test-school-type
+#| echo: false
 
-mean_measles_state <- measles_state |>
-  summarise(mean_mmr = mean(mmr)) 
+set.seed(17)
 
-high_low_state_mean <- measles_state |>
-  filter(state == c("Illinois", "Massachusetts", "Pennsylvania", "Arkansas", 
-                    "Washington", "Minnesota"))
+measles_filtered |>
+  group_by(type) |>
+  summarise(m = mean(mmr))
 
-high_low_state_mean |>
-  ggplot(
-    aes(x = mmr, y = state)) +
-  geom_boxplot() +
-  labs(title = "States with Highest and Lowest Reported MMR Vaccination Rates", 
-       x = "MMR Vaccination Rate (%)", 
-       y = "State")
+obs_stat_type_test <- 91.78767-62.43583
 
+boot_null_type <- measles_filtered |>
+  specify(response = mmr , explanatory = type) |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in means", order = c("Public", "Private"))
+
+boot_null_type |>
+  get_p_value(obs_stat = obs_stat_type_test, direction = "greater")
 ```
 
-Figure 4. This plot represents the six states with the highest and lowest MMR vaccination rates from the total states sampled. The states with the lowest reported MMR vaccination rates is Arkansas, Washington, and Minnesota. The states with the highest reported MMR vaccination rates is Massachusetts, Illinois, and Pennsylvania.
+We find evidence to reject the null hypothesis (p \< .05) and we find strong evidence for the alternative hypothesis that the vaccination rate in public schools is significantly higher than in private schools.
 
 [Models & Prediction]{.underline}
 
 ```{r}
 #| label: int-linear-reg
+#| echo: false
 
 int_model <- linear_reg() |>
   set_engine("lm") |>
@@ -249,33 +260,30 @@ int_model <- linear_reg() |>
 glance(int_model)$adj.r.squared
 ```
 
-The interactive model has an adjusted r-squared of 0.2799859. \[ENTER WHICH ONE IS BETTER\] vastly improve the adjusted r squared suggesting that this model has a better overall fit.
-
-Fitted model equation: $\hat{MMR} = 83.57550807$ THIS NEEDS FIXING
-
-Here we make a prediction based on that better model: so say a private school had this enrollment rate, X will happen AND WE VISUALIZE
+The interactive model has an adjusted r-squared of 0.2799859.
 
 ```{r}
-#| label: additive
+#| label: add-linear-reg
+#| echo: false
 
-int_model_additive <- linear_reg() |>
+add_model <- linear_reg() |>
   set_engine("lm") |>
   fit(mmr ~ type + enroll, data = measles) 
 
-glance(int_model_additive)$adj.r.squared
+glance(add_model)$adj.r.squared
 
 
 ```
 
-The additive model has an adjusted r-squared of 0.205.
+The additive model has an adjusted r-squared of 0.02078126.
+
+The higher adjusted r squared for the interactive model, over the additive one, suggests that the interactive model has a better overall fit.
 
 ```{r}
 #| label: prediction
+#| echo: false
 
-
-new_data <- data.frame(type = "Public", enroll = 100)
-predicted_mmr <- predict(int_model, new_data = new_data)
-predicted_mmr
+predict(int_model, data.frame(type = "Public", enroll = 100))
 
 ```
 
@@ -299,10 +307,10 @@ $H_a$: $\pi_{priv}$ ≠ $\pi_{pub}$ ; the true proportion of students enrolled i
 
 Figure 1 - This visualization answers the 1st research question by showing which states have a high percentage of mmr vaccination rates across different schools (such as Ohio), and states that have a low percentage (such as Florida). Though Ohio and Florida don't show much variability across different schools, California does show a lot of variability. Overall, this shows a general map of how mmr vaccination rates differ across different regions in the US.
 
-Figure 2 - The graph showing the average vaccination rates between private and public schools seems to show a higher average vaccination rate for public schools. This is possibly due to local government rules and control over public schools in which students may be mandated to get vaccinated. Whereas in private schools it may have been more up to choice and out of government control.
+Figure 2 - To explore if there is a relationship between urban and rural status and MMR vaccination rate, first, the states with the highest (Massachusetts, Illinois, and Pennsylvania) and lowest (Arkansas, Washington, and Minnesota) mean MMR vaccination rates were plotted. On its own this does not display any relation of urban or rural status to percentage of MMR vaccination rates, so information, provided by Iowa State University, on the 2010 U.S. Decennial Cenus was referenced \[1\]. The percentage of the total population in urban areas per each state was found: Massachusetts (92%), Illinois (88.5%), Pennsylvania (78.7%), Arkansas (56.2%), Washington (84.1%), and Minnesota (73.3%). There appears to be a weak correlation between urban/rural status of each state and MMR vaccination rate, but to a slight degree there is a trend. For instance, the state with the most drastic difference in mean MMR vaccination rate is Arkansas (80.49%) when compared to states with the highest mean MMR vaccination rates (\>95%). Relatedly, Arkansas also has a significantly lower percentage of the total population in urban areas. States like Massachusetts and Illinois hold comparably higher percentages of the total population in urban areas *and* hold the highest mean MMR vaccination rates, 97.04% & 97.39%, respectively. However, states like Washington weaken the correlation by having a high percentage of the total population in urban areas, but reporting a comparably low mean MMR vaccination rate (89.3%).
 
-Figure 3 - The data reported for Charter, Kindergarten and Private schools shows that for schools with no new enrollments the vaccination rates reported differ significantly. For public schools we see a little more diversity, but no strong correlation either. Public schools with 0 new enrollments may have high or even no vaccination rates reported, but generally we see that a high enrollment rate rarely leads to low vaccination rates (this also applies to Charter, Kindergarten, and private schools). This visualization answers the question on whether or not enrollment numbers has an effect on vaccination rates, for which it was determined, enrollment rate is not a determining factor.
+Figure 3 -
 
-Figure 4 - To explore if there is a relationship between urban and rural status and MMR vaccination rate, first, the states with the highest (Massachusetts, Illinois, and Pennsylvania) and lowest (Arkansas, Washington, and Minnesota) mean MMR vaccination rates were plotted. On its own this does not display any relation of urban or rural status to percentage of MMR vaccination rates, so information, provided by Iowa State University, on the 2010 U.S. Decennial Cenus was referenced \[1\]. The percentage of the total population in urban areas per each state was found: Massachusetts (92%), Illinois (88.5%), Pennsylvania (78.7%), Arkansas (56.2%), Washington (84.1%), and Minnesota (73.3%). There appears to be a weak correlation between urban/rural status of each state and MMR vaccination rate, but to a slight degree there is a trend. For instance, the state with the most drastic difference in mean MMR vaccination rate is Arkansas (80.49%) when compared to states with the highest mean MMR vaccination rates (\>95%). Relatedly, Arkansas also has a significantly lower percentage of the total population in urban areas. States like Massachusetts and Illinois hold comparably higher percentages of the total population in urban areas *and* hold the highest mean MMR vaccination rates, 97.04% & 97.39%, respectively. However, states like Washington weaken the correlation by having a high percentage of the total population in urban areas, but reporting a comparably low mean MMR vaccination rate (89.3%).
+Figure 4 - The data reported for Charter, Kindergarten and Private schools shows that for schools with no new enrollments the vaccination rates reported differ significantly. For public schools we see a little more diversity, but no strong correlation either. Public schools with 0 new enrollments may have high or even no vaccination rates reported, but generally we see that a high enrollment rate rarely leads to low vaccination rates (this also applies to Charter, Kindergarten, and private schools). This visualization answers the question on whether or not enrollment numbers has an effect on vaccination rates, for which it was determined, enrollment rate is not a determining factor.
 
-Full disclosure: The first visualization has "eval: FALSE" to facilitate pushing and pulling on GitHub (leaflet takes up a lot of space).
+Figure 5 - The graph showing the average vaccination rates between private and public schools seems to show a higher average vaccination rate for public schools. This is possibly due to local government rules and control over public schools in which students may be mandated to get vaccinated. Whereas in private schools it may have been more up to choice and out of government control.
