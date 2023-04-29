@@ -25,25 +25,15 @@ library(kableExtra)
 
 The motivation for this project stemmed from the measles dataset from tidytuesday. It was interesting to see how the data set categorically characterized the data. Our team imported the data into R and used the categories as a guide to make our plots and questions. The data as reported in the Wall Street Journal presents a map of measles vaccination rates in schools across the United States, showing that some schools have dangerously low vaccination rates, which increases the risk of measles outbreaks. The data is based on information from the 2018-2019 school year and includes public, private, and charter schools. According to the map, many of the schools with the lowest vaccination rates are in states such as Idaho, Utah, Colorado, and Oregon. The article also notes that measles cases have been on the rise in recent years, and emphasizes the importance of vaccination in preventing the spread of the highly contagious virus. Through this narrative and viewing the raw data we were able to form our hypothesis and question.
 
-**Research question:** In 2018, how does the vaccination rate for measles differ across regions in the US? How do school districts in regions with high vaccination rates vs. low vaccination rates differ (public v. private, enrollment statistics, type of geographical region - urban, rural)?
+**Research question:** Are schools' vaccination rates influence by the type of school, state it's located in, and it's enrollment numbers? If so, can valid predictions on vaccination rates be made from these variables?
 
-**Hypothesis:** It is expected that states with higher rates of urbanization will have higher vaccination rates for mmr. It is also expected that schools in these states will have higher vaccination rates, differing mainly on whether they are private or public (whereby private may have higher rates).
+**Hypothesis:** It is expected that private schools with higher enrollment numbers will have higher rates of MMR vaccination. It is also expected that states with a high concentration of these schools  will have higher vaccination rates.
 
 **The Data:**
 
 Quantitative - vaccination rates
 
 Categorical - private or public and county and state levels
-
-**Ethical Issues**
-
-Vaccination data is listed under HIPAA as protected health information and therefore cannot be shared without patient consent. In certain areas, vaccine data is not required for schools as well. The data may also be used to discriminate against certain areas unjustly. The US does not all benefit equally from our research. Some areas may also be more or less receptive to revealing their vaccination information so the study may not impact our target population equally.
-
-**Limitations**
-
-We saw negative values, but we don't know what it means - perhaps these suggest that the schools did/do not report vaccination rates.
-
-Some states do not require schools to report MMR vaccination data, us resulting in a lack of information for a few states. This results in inconclusive data from those states, and they will not be considered for this research analysis.
 
 ## Methodology
 
@@ -164,7 +154,9 @@ tablemeasles <- measles |>
   filter(mmr %in% max(mmr) | mmr %in% min(mmr)) |>
   summarise(county = county,
             mmr = mmr) |>
-  arrange(mmr) |>
+  arrange(mmr) 
+
+tablemeasles|>
   kbl() |>
   kable_material(c("striped", "hover"))
 
@@ -256,6 +248,7 @@ boot_null_type |>
   get_p_value(obs_stat = obs_stat_type_test, direction = "greater") |>
   kbl() |>
   kable_material(c("striped", "hover"))
+
 ```
 
 We find evidence to reject the null hypothesis (p \< .05) and we find strong evidence for the alternative hypothesis that the vaccination rate in public schools is significantly higher than in private schools.
@@ -359,11 +352,11 @@ Figure 3 - The data reported for maximum and minimum average vaccination rate by
 
 Figure 4 - The data reported for Charter, Kindergarten and Private schools shows that for schools with no new enrollments the vaccination rates reported differ significantly. For public schools we see a little more diversity, but no strong correlation either. Public schools with 0 new enrollments may have high or even no vaccination rates reported, but generally we see that a high enrollment rate rarely leads to low vaccination rates (this also applies to Charter, Kindergarten, and private schools). This visualization answers the question on whether or not enrollment numbers has an effect on vaccination rates, for which it was determined, enrollment rate is not a determining factor.
 
-Figure 5 - The graph showing the average vaccination rates between private and public schools seems to show a higher average vaccination rate for public schools. This is possibly due to local government rules and control over public schools in which students may be mandated to get vaccinated. Whereas in private schools it may have been more up to choice and out of government control. The resulting hypothesis test showed that there is a significant difference in vaccination rate between public schromools and private school (p\<.05). This number may not be wholly accurate due to the removal of much private school data, but we assume the difference can be attributed to a lack of vaccine mandate within private schools.
+Figure 5 - The graph showing the average vaccination rates between private and public schools seems to show a higher average vaccination rate for public schools. This is possibly due to local government rules and control over public schools in which students may be mandated to get vaccinated. Whereas in private schools it may have been more up to choice and out of government control. The resulting hypothesis test showed that there is a significant difference in vaccination rate between public schools and private school (p\<.05). This number may not be wholly accurate due to the removal of much private school data, but we assume the difference can be attributed to a lack of vaccine mandate within private schools.
 
 ##Discussion
 
-Summary: F
+Summary: From our analyses, we learned that whether students attend a private or public school DOES affect, at least to some extent, how high vaccination rates are. In addition, and in answer to our research questions, state, type of school, and enrollment number provide good predictions on the vaccination rates reported - with enrollment and state being the best predictors. In essence, all our factors influence schools' vaccination rates.
 
 Ethical considerations: Vaccination data is listed under the Health Insurance Portability and Accountability Act (HIPAA) as protected health information and therefore cannot be shared without patient consent. In certain areas, vaccine data is not required for schools as well. The data may also be used to discriminate against certain areas unjustly. The US does not all benefit equally from our research. Some areas may so be more or less receptive to revealing their vaccination information so the study may not impact our target population equally.
 
@@ -373,7 +366,7 @@ Some states do not require schools to report MMR vaccination data, thus resultin
 
 While our research question seeks to understand the influence of geographic region status (urban vs rural), the dataset collected does not contain information on the geographic status where each school is located. While we pooled external information drawn from the 2010 US Decennial Census, the analysis derived might not accurately reflect the relationship between these two variables.
 
-Future work: Our study had a very defined scope. However, future work could include observing vaccination rates in different states or outside of the US. Additionally, testing other variables in anticipation of yielding a stronger predictive model could be another route. 
+Future work: Our study had a very defined scope. However, future work could include observing vaccination rates in different states or outside of the US. Additionally, testing other variables in anticipation of yielding a stronger predictive model could be another route. Last but not least, this data relies mostly on reported vaccination rates from 2018-19, so other (perhaps more current) years should be considered to reach thorough conclusions. Perhaps comparing this data with measles outbreak or cases, would be an interesting route to understand the effect that vaccination rates in schools have on measles cases.
 
 ##References
 
