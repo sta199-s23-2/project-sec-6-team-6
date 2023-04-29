@@ -337,6 +337,7 @@ glance(int_model3)$adj.r.squared |>
 ```{r}
 #| label: prediction
 #| echo: false
+#| eval: FALSE
 
 predict(int_model, data.frame(type = "Public", enroll = 100))
 
