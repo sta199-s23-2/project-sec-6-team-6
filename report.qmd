@@ -27,7 +27,7 @@ The motivation for this project stemmed from the measles dataset from tidytuesda
 
 **Research question:** Are schools' vaccination rates influence by the type of school, state it's located in, and it's enrollment numbers? If so, can valid predictions on vaccination rates be made from these variables?
 
-**Hypothesis:** It is expected that private schools with higher enrollment numbers will have higher rates of MMR vaccination. It is also expected that states with a high concentration of these schools  will have higher vaccination rates.
+**Hypothesis:** It is expected that private schools with higher enrollment numbers will have higher rates of MMR vaccination. It is also expected that states with a high concentration of these schools will have higher vaccination rates.
 
 **The Data:**
 
@@ -354,6 +354,8 @@ Figure 3 - The data reported for maximum and minimum average vaccination rate by
 Figure 4 - The data reported for Charter, Kindergarten and Private schools shows that for schools with no new enrollments the vaccination rates reported differ significantly. For public schools we see a little more diversity, but no strong correlation either. Public schools with 0 new enrollments may have high or even no vaccination rates reported, but generally we see that a high enrollment rate rarely leads to low vaccination rates (this also applies to Charter, Kindergarten, and private schools). This visualization answers the question on whether or not enrollment numbers has an effect on vaccination rates, for which it was determined, enrollment rate is not a determining factor.
 
 Figure 5 - The graph showing the average vaccination rates between private and public schools seems to show a higher average vaccination rate for public schools. This is possibly due to local government rules and control over public schools in which students may be mandated to get vaccinated. Whereas in private schools it may have been more up to choice and out of government control. The resulting hypothesis test showed that there is a significant difference in vaccination rate between public schools and private school (p\<.05). This number may not be wholly accurate due to the removal of much private school data, but we assume the difference can be attributed to a lack of vaccine mandate within private schools.
+
+The additive model yielded an adjusted r-square value of 0.243 using the type, enroll, and state variables. This was a considerably lower adjusted r-squared value than the interactive model which yielded an adjusted-r-squared of 0.47. Therefore, we continued using the interactive model as a framework for testing the predictability of other variables. We proceeded to test the predictability of enrollment and and type through constructing two separate models with one being state and enroll and the other being state and type. We found that the model with state and enroll had a far higher adjusted-r-squared of 0.87 compared to the other model\'s adjusted r-squared of 0.34. Despite the higher adjusted r squared, our question evaluated whether state, enrollment number, and type of school would be good predictors, so we chose the original interactive model for the prediction. We were not really quite sure why this occurred however it was an interesting finding that warrants further investigation in future studies. 
 
 ##Discussion
 
