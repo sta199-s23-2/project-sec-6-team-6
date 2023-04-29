@@ -366,7 +366,7 @@ Figure 5 - The graph showing the average vaccination rates between private and p
 
 The additive model yielded an adjusted r-square value of 0.243 using the type, enroll, and state variables. This was a considerably lower adjusted r-squared value than the interactive model which yielded an adjusted-r-squared of 0.47. Therefore, we continued using the interactive model as a framework for testing the predictability of other variables. We proceeded to test the predictability of enrollment and and type through constructing two separate models with one being state and enroll and the other being state and type. We found that the model with state and enroll had a far higher adjusted-r-squared of 0.87 compared to the other model's adjusted r-squared of 0.34. Despite the higher adjusted r squared, our question evaluated whether state, enrollment number, and type of school would be good predictors, so we chose the original interactive model for the prediction. We were not really quite sure why this occurred however it was an interesting finding that warrants further investigation in future studies. 
 
-##Discussion
+## Discussion
 
 Summary: From our analyses, we learned that whether students attend a private or public school DOES affect, at least to some extent, how high vaccination rates are. In addition, and in answer to our research questions, state, type of school, and enrollment number provide good predictions on the vaccination rates reported - with enrollment and state being the best predictors. In essence, all our factors influence schools' vaccination rates.
 
