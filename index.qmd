@@ -5,4 +5,6 @@ format: html
 editor: visual
 ---
 
-Add project abstract here.
+## Abstract
+
+Due to the COVID-19 pandemic, Measles cases have been on the rise. To prevent another pandemic, and for the health of our future generations, it is of essence to understand why measles cases have been on the rise and how to prevent it. Vaccinations, as we all know, are low-risk preventors of outbreaks as these, so we analyzed different factors that increase/decrease vaccination rates across the US. In this paper, the type of school (public v. private), state the school is located in, as well as enrollment numbers for that school were all considered. It was identified that all these variables influence vaccination rates in school - with the best predictors being enrollment numbers and the state the school is located in.
