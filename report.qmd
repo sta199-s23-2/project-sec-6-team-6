@@ -243,9 +243,7 @@ boot_null_type <- measles_filtered |>
   calculate(stat = "diff in means", order = c("Public", "Private"))
 
 boot_null_type |>
-  get_p_value(obs_stat = obs_stat_type_test, direction = "greater") |>
-  kbl() |>
-  kable_material(c("striped", "hover"))
+  get_p_value(obs_stat = obs_stat_type_test, direction = "greater")
 
 ```
 
@@ -270,6 +268,7 @@ tidy(int_model) |>
 glance(int_model)$adj.r.squared |>
   kbl() |>
   kable_material(c("striped", "hover"))
+
 ```
 
 The interactive model has an adjusted r-squared of 0.4717082.
