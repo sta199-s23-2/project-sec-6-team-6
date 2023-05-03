@@ -1,5 +1,5 @@
 ---
-title: "Project title"
+title: "The Measles Project"
 subtitle: "Proposal"
 format: html
 editor: visual
