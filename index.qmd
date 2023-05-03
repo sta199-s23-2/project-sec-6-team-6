@@ -1,6 +1,6 @@
 ---
 title: "TEAM 6"
-subtitle: "STA 199 Project"
+subtitle: "Abstract"
 format: html
 editor: visual
 ---
