@@ -5,8 +5,3 @@ editor: visual
 ---
 
 This project was developed by **Team Six** For [STA 199: Introduction to Data Science](https://sta199-s23-2.github.io/) at Duke University. The team is comprised of the following team members.
-
--   Sigrid Real-Aguilar: Sigrid is a class of 2025 sophomore majoring in Chemistry and minoring in Italian.
--   Austin Chang: Austin is a class of 2025 sophomore majoring in Statistics and Psychology.
--   Cristofer Navas: Class of 2025 student at Duke University majoring in Biology and minoring in Chemistry.
--   Miran Bhima: Miran is a class of 2026 freshman majoring in Statistics.
